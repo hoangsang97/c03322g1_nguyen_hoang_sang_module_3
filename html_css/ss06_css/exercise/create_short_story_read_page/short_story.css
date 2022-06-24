@@ -1,0 +1,35 @@
+.main {
+    display: flex;
+    margin-top: 10px;
+    border-top: 1px solid black;
+}
+
+/* MENU */
+.menu {
+    width: 80%;
+    border-right: 1px solid black;
+    padding-right: 10px;
+}
+ol {
+    line-height: 30px;
+}
+a{
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+}
+li:hover {
+    color: blue;
+}
+
+/* CONTENT */
+.content {
+    margin-left: 20px;
+}
+.shared {
+    padding: 20px;
+}
+p {
+    margin-top: -10px;
+    text-indent: 30px;
+}
