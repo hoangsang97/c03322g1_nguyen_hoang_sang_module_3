@@ -8,28 +8,48 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
 <html>
-<style type="text/css">
-    .login {
-        height: 180px;
-        width: 230px;
-        margin: 0;
-        padding: 10px;
-        border: 1px #CCC solid;
-    }
+<head>
+    <title>$Title$</title>
+    <style>
+        #content {
+            width: 450px;
+            margin: 0 auto;
+            padding: 0 20px 20px;
+            background: white;
+            border: 2px solid navy;
+        }
 
-    .login input {
-        padding: 5px;
-        margin: 5px
-    }
-</style>
+        label {
+            width: 10em;
+            padding-right: 1em;
+            float: left;
+        }
+
+        #data input {
+            float: left;
+            width: 15em;
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
 <body>
-<form>
-    <div class="login">
-        <h2>Login</h2>
-        <input type="text" name="username" size="30" placeholder="username"/>
-        <input type="password" name="password" size="30" placeholder="password"/>
-        <input type="submit" value="Sign in"/>
-    </div>
-</form>
+<div id="content">
+    <form action="/ServletDemo" method="post">
+        <div id="data">
+            <label>Product description</label>
+            <input type="text" name="description">
+            <br>
+            <label>Price</label>
+            <input type="text" name="price">
+            <br>
+            <label>discount percent</label>
+            <input type="text" name="discount">
+        </div>
+        <div>
+            <br>
+            <input type="submit" value="Discount Product">
+        </div>
+    </form>
+</div>
 </body>
 </html>
