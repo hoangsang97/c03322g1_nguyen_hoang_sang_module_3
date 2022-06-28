@@ -23,17 +23,26 @@ public class TranslationServlet extends HttpServlet {
 
         String search = request.getParameter("txtSearch");
 
-        PrintWriter writer = response.getWriter();
-        writer.println("<html>");
+        String text = "Not found";
+
+//        PrintWriter writer = response.getWriter();
+//        writer.println("<html>");
 
         String result = dictionary.get(search);
         if(result != null){
-            writer.println("Word: " + search);
-            writer.println("Result: " + result);
+//            writer.println("Word: " + search);
+//            writer.println("Result: " + result);
+            request.setAttribute("word", search);
+            request.setAttribute("result", result);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+            dispatcher.forward(request, response);
         } else {
-            writer.println("Not found");
+//            writer.println("Not found");
+            request.setAttribute("text", text);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+            dispatcher.forward(request, response);
         }
 
-        writer.println("</html>");
+//        writer.println("</html>");
     }
 }

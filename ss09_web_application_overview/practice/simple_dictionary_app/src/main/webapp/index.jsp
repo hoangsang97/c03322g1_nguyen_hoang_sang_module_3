@@ -18,5 +18,8 @@
     <input type="text" name="txtSearch" placeholder="Enter your word: "/>
     <input type="submit" id="submit" value="Search"/>
 </form>
+<h3>Word: ${word}</h3>
+<h3>Result: ${result}</h3>
+<h3>${text}</h3>
 </body>
 </html>
