@@ -15,6 +15,6 @@ public interface ProductService {
 
     void remove(int id);
 
-    void search(String name);
+    Product search(String name);
 
 }

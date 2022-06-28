@@ -19,15 +19,15 @@
 <body>
 <h1>Create Product</h1>
 <p>
-    <c:if test="">
-
+    <c:if test="${message != null}">
+        <span style="color: green">${message}</span>
     </c:if>
 </p>
 
 <p>
     <a href="/ProductServlet">Back to product list</a>
 </p>
-<form action="" method="post">
+<form method="post">
     <fieldset>
         <legend>Product information</legend>
         <table>
@@ -49,7 +49,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Create customer"></td>
+                <td><input type="submit" value="Create product"></td>
             </tr>
         </table>
     </fieldset>

@@ -40,12 +40,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void remove(int id) {
-        productMap.get(id);
+        productMap.remove(id);
     }
 
     @Override
-    public void search(String name) {
-        productMap.get(name);
+    public Product search(String name) {
+        for (Map.Entry<Integer, Product> entry: productMap.entrySet()) {
+            if (entry.getValue().getName().contains(name)){
+                return productMap.get(entry.getKey());
+            }
+        }
+        return null;
     }
 
     public int countId() {

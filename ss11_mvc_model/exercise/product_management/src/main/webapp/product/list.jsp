@@ -21,9 +21,13 @@
 </head>
 <body>
     <h1>Product List</h1>
+    <p>
+        <a href="/ProductServlet?action=create">Create new customer</a>
+    </p>
     <div class="border p-3">
         <table class="table table-success table-striped">
             <tr>
+                <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">price</th>
                 <th scope="col">description</th>
@@ -34,13 +38,14 @@
             </tr>
             <c:forEach items="${products}" var="item">
                 <tr>
-                    <td><a href="/products?action=view&id=${item.getId()}">${item.getName()}</a></td>
+                    <td>${item.getId()}</td>
+                    <td><a href="/ProductServlet?action=view&id=${item.getId()}">${item.getName()}</a></td>
                     <td>${item.getPrice()}</td>
                     <td>${item.getDescription()}</td>
                     <td>${item.getProducer()}</td>
-                    <td><a href="/products?action=view&id=${item.getId()}">edit</a></td>
-                    <td><a href="/products?action=view&id=${item.getId()}">delete</a></td>
-                    <td><a href="/products?action=view&id=${item.getId()}">search</a></td>
+                    <td><a href="/ProductServlet?action=edit&id=${item.getId()}">edit</a></td>
+                    <td><a href="/ProductServlet?action=delete&id=${item.getId()}">delete</a></td>
+                    <td><a href="/ProductServlet?action=search">search</a></td>
                 </tr>
             </c:forEach>
         </table>
