@@ -79,9 +79,10 @@ public class EmployeeService extends HttpServlet {
     private void createEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
         String gender = request.getParameter("gender");
+        String level = request.getParameter("level");
         int id = employeeCountId.count() + 1;
 
-        Employee employee = new Employee(id, name, gender);
+        Employee employee = new Employee(id, name, gender, level);
         employeeService.create(employee);
         response.sendRedirect("/employee");
     }
@@ -104,9 +105,7 @@ public class EmployeeService extends HttpServlet {
 
         employeeService.update(id, employee);
 
-        employeeList = employeeService.findAll();
-        request.setAttribute("employee", employeeList);
-        request.getRequestDispatcher("employee/list.jsp").forward(request, response);
+        response.sendRedirect("/employee");
     }
 
     private void showDeleteEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

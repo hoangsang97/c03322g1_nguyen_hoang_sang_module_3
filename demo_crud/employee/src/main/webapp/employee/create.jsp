@@ -30,6 +30,16 @@
                 </td>
             </tr>
             <tr>
+                <td>level: </td>
+                <td>
+                    <select name="level">
+                        <option value="1">good</option>
+                        <option value="2">rather</option>
+                        <option value="3">medium</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td><input type="submit" value="Create"></td>
             </tr>
         </table>

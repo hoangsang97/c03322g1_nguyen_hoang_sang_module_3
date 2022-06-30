@@ -13,6 +13,10 @@
 </head>
 <body>
 <h1>List Employee</h1>
+<p>
+    <a href="/employee?action=create">Create</a>
+</p>
+
 <form>
     <input type="text" placeholder="tìm kiếm" name="nameSearch">
     <input type="submit" value="search" name="action">
@@ -23,8 +27,8 @@
         <th>Id</th>
         <th>Name</th>
         <th>Gender</th>
+        <th>Level</th>
         <th>Edit</th>
-        <th>Create</th>
         <th>Delete</th>
     </tr>
     <c:forEach items="${employee}" var="item">
@@ -37,8 +41,8 @@
             <c:if test="${item.getGender() == '1'}">
                 <td>Nam</td>
             </c:if>
+            <td>${item.getLevel()}</td>
             <td><a href="/employee?action=edit&id=${item.getId()}">Edit</a></td>
-            <td><a href="/employee?action=create">Create</a></td>
             <td><a href="/employee?action=delete&id=${item.getId()}">Delete</a></td>
         </tr>
     </c:forEach>

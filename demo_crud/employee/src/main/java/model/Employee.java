@@ -4,14 +4,16 @@ public class Employee {
     private int id;
     private String name;
     private String gender;
+    private String level;
 
     public Employee() {
     }
 
-    public Employee(int id, String name, String gender) {
+    public Employee(int id, String name, String gender, String level) {
         this.id = id;
         this.name = name;
         this.gender = gender;
+        this.level = level;
     }
 
     public int getId() {
@@ -36,5 +38,13 @@ public class Employee {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 }

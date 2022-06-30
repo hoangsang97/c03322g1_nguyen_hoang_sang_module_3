@@ -28,8 +28,36 @@
                 <td>Gender: </td>
                 <td>
                     <select name="gender">
-                        <option value="0">Nữ</option>
-                        <option value="1">Nam</option>
+                        <c:if test="${employee.getGender() == 0}">
+                            <option value="0" selected>Nữ</option>
+                            <option value="1">Nam</option>
+                        </c:if>
+                        <c:if test="${employee.getGender() == 1}">
+                            <option value="0">Nữ</option>
+                            <option value="1" selected>Nam</option>
+                        </c:if>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>level: </td>
+                <td>
+                    <select name="level">
+                        <c:if test="${employee.getLevel() == 1}">
+                            <option value="1" selected>good</option>
+                            <option value="2">rather</option>
+                            <option value="3">medium</option>
+                        </c:if>
+                        <c:if test="${employee.getLevel() == 2}">
+                            <option value="1">good</option>
+                            <option value="2" selected>rather</option>
+                            <option value="3">medium</option>
+                        </c:if>
+                        <c:if test="${employee.getLevel() == 3}">
+                            <option value="1">good</option>
+                            <option value="2">rather</option>
+                            <option value="3" selected>medium</option>
+                        </c:if>
                     </select>
                 </td>
             </tr>
