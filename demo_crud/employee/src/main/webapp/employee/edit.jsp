@@ -42,18 +42,18 @@
             <tr>
                 <td>level: </td>
                 <td>
-                    <select name="level">
-                        <c:if test="${employee.getLevel() == 1}">
+                    <select name="id_level">
+                        <c:if test="${employee.getLevel() == '1'}">
                             <option value="1" selected>good</option>
                             <option value="2">rather</option>
                             <option value="3">medium</option>
                         </c:if>
-                        <c:if test="${employee.getLevel() == 2}">
+                        <c:if test="${employee.getLevel() == '2'}">
                             <option value="1">good</option>
                             <option value="2" selected>rather</option>
                             <option value="3">medium</option>
                         </c:if>
-                        <c:if test="${employee.getLevel() == 3}">
+                        <c:if test="${employee.getLevel() == '3'}">
                             <option value="1">good</option>
                             <option value="2">rather</option>
                             <option value="3" selected>medium</option>

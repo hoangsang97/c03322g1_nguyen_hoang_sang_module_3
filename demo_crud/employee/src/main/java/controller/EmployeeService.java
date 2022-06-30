@@ -97,11 +97,14 @@ public class EmployeeService extends HttpServlet {
     private void editEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String name = request.getParameter("name");
         String gender = request.getParameter("gender");
+        String id_level = request.getParameter("id_level");
+        System.out.println(id_level);
         int id = Integer.parseInt(request.getParameter("id"));
 
         Employee employee = employeeService.findById(id);
         employee.setName(name);
         employee.setGender(gender);
+        employee.setLevel(id_level);
 
         employeeService.update(id, employee);
 

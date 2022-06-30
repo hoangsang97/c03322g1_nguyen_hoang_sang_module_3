@@ -34,6 +34,18 @@
                 </c:if>
             </tr>
             <tr>
+                <td>level:</td>
+                <c:if test="${employee.getLevel() == '1'}">
+                    <td>good</td>
+                </c:if>
+                <c:if test="${employee.getLevel() == '2'}">
+                    <td>rather</td>
+                </c:if>
+                <c:if test="${employee.getLevel() == '3'}">
+                    <td>medium</td>
+                </c:if>
+            </tr>
+            <tr>
                 <td><input type="submit" value="Delete"></td>
             </tr>
         </table>
