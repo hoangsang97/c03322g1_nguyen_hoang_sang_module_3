@@ -2,10 +2,7 @@ package repository;
 
 import model.Employee;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,8 +35,106 @@ public class EmployeeRepositoryImpl implements IEmployeeRepository{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return employeeList;
+    }
+
+    @Override
+    public List<Employee> findAllProcedure() {
+        List<Employee> employeeList = new ArrayList<>();
+        try {
+            CallableStatement callableStatement = new BaseRepository().getConnection().prepareCall("CALL display_information()");
+            ResultSet resultSet = callableStatement.executeQuery();
+
+            Employee employee = null;
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String gender = resultSet.getString("gender");
+                String level = resultSet.getString("level");
+
+                employee = new Employee(id, name, gender, level);
+                employeeList.add(employee);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return employeeList;
+    }
+
+    @Override
+    public void procedureUpdate(int id, Employee employee) {
+        try {
+            CallableStatement callableStatement = new BaseRepository().getConnection().prepareCall("CALL update_infomation(?, ?, ?, ?)");
+            callableStatement.setString(1, employee.getName());
+            callableStatement.setString(2, employee.getGender());
+            callableStatement.setString(3, employee.getLevel());
+            callableStatement.setInt(4, employee.getId());
+            callableStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void procedureDelete(int id) {
+        try {
+            CallableStatement callableStatement = new BaseRepository().getConnection().prepareCall("CALL delete_infomation( ?)");
+            callableStatement.setInt(1, id);
+            callableStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public String callTransaction() {
+        String msg = "OK, transaction successfully!";
+        Connection connection = new BaseRepository().getConnection();
+
+        try {
+            connection.setAutoCommit(false);
+
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
+            preparedStatement.setString(1, "sang");
+            preparedStatement.setString(2, "0");
+            preparedStatement.setString(3, "1");
+
+            int rowAffect = preparedStatement.executeUpdate();
+
+            PreparedStatement preparedStatementS = connection.prepareStatement(INSERT);
+            preparedStatement.setString(1, "dan");
+            preparedStatement.setString(2, "1");
+            preparedStatement.setString(3, "1");
+
+            rowAffect += preparedStatementS.executeUpdate();
+
+            if (rowAffect == 2) {
+                PreparedStatement preparedStatementSs = connection.prepareStatement(INSERT);
+                preparedStatement.setString(1, "nguyễn");
+                preparedStatement.setString(2, "0");
+                preparedStatement.setString(3, "1");
+
+                rowAffect += preparedStatementSs.executeUpdate();
+            }
+
+            if (rowAffect == 3) {
+                connection.commit();
+            } else {
+                msg = "Rollback try";
+                connection.rollback();
+            }
+        } catch (SQLException e) {
+            try {
+                msg = "Rollback catch";
+                connection.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+        return msg;
     }
 
     @Override

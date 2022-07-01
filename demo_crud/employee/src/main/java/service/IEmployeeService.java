@@ -17,4 +17,11 @@ public interface IEmployeeService {
 
     List<Employee> search(String name);
 
+    List<Employee> findAllProcedure();
+
+    void procedureUpdate(int id, Employee employee);
+
+    void procedureDelete(int id);
+
+    String callTransaction();
 }

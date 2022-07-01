@@ -39,6 +39,9 @@ public class EmployeeService extends HttpServlet {
             case "search":
                 searchEmployee(request, response);
                 break;
+            case "callTransaction":
+                callTransaction();
+                break;
             default:
                 listEmployee(request, response);
                 break;
@@ -66,7 +69,7 @@ public class EmployeeService extends HttpServlet {
     }
 
     private void listEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        employeeList = employeeService.findAll();
+        employeeList = employeeService.findAllProcedure();
 
         request.setAttribute("employee", employeeList);
         request.getRequestDispatcher("employee/list.jsp").forward(request, response);
@@ -106,7 +109,7 @@ public class EmployeeService extends HttpServlet {
         employee.setGender(gender);
         employee.setLevel(id_level);
 
-        employeeService.update(id, employee);
+        employeeService.procedureUpdate(id, employee);
 
         response.sendRedirect("/employee");
     }
@@ -120,7 +123,7 @@ public class EmployeeService extends HttpServlet {
 
     private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        employeeService.delete(id);
+        employeeService.procedureDelete(id);
 
         employeeList = employeeService.findAll();
         request.setAttribute("employee", employeeList);
@@ -133,5 +136,9 @@ public class EmployeeService extends HttpServlet {
 
         request.setAttribute("employee", employeeList);
         request.getRequestDispatcher("employee/list.jsp").forward(request, response);
+    }
+
+    private void callTransaction() {
+        employeeService.callTransaction();
     }
 }

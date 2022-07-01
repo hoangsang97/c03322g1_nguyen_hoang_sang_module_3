@@ -39,6 +39,26 @@ public class EmployeeServiceImpl implements IEmployeeService{
         return employeeRepository.search(name);
     }
 
+    @Override
+    public List<Employee> findAllProcedure() {
+        return employeeRepository.findAllProcedure();
+    }
+
+    @Override
+    public void procedureUpdate(int id, Employee employee) {
+        employeeRepository.procedureUpdate(id, employee);
+    }
+
+    @Override
+    public void procedureDelete(int id) {
+        employeeRepository.procedureDelete(id);
+    }
+
+    @Override
+    public String callTransaction() {
+        return employeeRepository.callTransaction();
+    }
+
     public int count() {
        return employeeRepository.findAll().get(employeeRepository.findAll().size() -1).getId();
     }
