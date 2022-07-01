@@ -15,6 +15,27 @@ create table employee (
     foreign key (id_level) references `level`(id_level)
 );
 
+delimiter //
+create procedure display_information()
+begin
+SELECT e.id, e.name, e.gender, lv.level FROM employee e join `level` lv on e.id_level = lv.id_level ORDER BY e.id ;
+end
+// delimiter ;
+
+delimiter //
+create procedure update_infomation(in employee_name varchar(50), in employee_gender varchar(2),in employee_id_level int, in employee_id int)
+begin
+UPDATE employee SET name = employee_name, gender = employee_gender, id_level = employee_id_level WHERE id = employee_id;
+end
+// delimiter ;
+
+delimiter //
+create procedure delete_infomation(in employee_id int)
+begin
+DELETE FROM employee WHERE id = employee_id;
+end
+// delimiter ;
+
 insert into `level`(`level`) values ("good"), ("rather"), ("medium");
 insert into employee(`name`, gender, id_level) 
 values ("Nguyen Van A", "1", 1),
