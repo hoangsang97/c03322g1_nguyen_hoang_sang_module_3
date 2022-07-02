@@ -26,6 +26,11 @@
 
         a {
             text-decoration: none;
+            color: black;
+        }
+
+        a:hover {
+            color: dodgerblue;
         }
 
         .header {
@@ -133,8 +138,8 @@
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Address</th>
-                    <th>Address</th>
-                    <th>Address</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
                 <c:forEach items="${customer}" var="item">
                     <tr>
@@ -152,6 +157,7 @@
                         <td>${item.getCustomerPhone()}</td>
                         <td>${item.getCustomerEmail()}</td>
                         <td>${item.getCustomerAddress()}</td>
+                        <td><a href="/customer?action=edit&id=${item.getCustomerId()}">Edit</a></td>
                     </tr>
                 </c:forEach>
             </table>

@@ -12,13 +12,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
-        h1 {
+        h1, p {
             text-align: center;
+        }
+        a {
+            color: black;
+        }
+        a:hover {
+            color: dodgerblue;
         }
     </style>
 </head>
 <body>
 <h1>Create Customer</h1>
+<p>
+    <a href="/customer">Back to home</a>
+</p>
 <div class="container">
     <form action="/customer?action=create" class="row g-3" method="post">
         <div class="col-12">

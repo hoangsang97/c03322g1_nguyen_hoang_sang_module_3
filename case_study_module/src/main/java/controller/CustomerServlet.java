@@ -29,6 +29,7 @@ public class CustomerServlet extends HttpServlet {
                 showCreateCustomer(request, response);
                 break;
             case "edit":
+                showUpdateCustomer(request, response);
                 break;
             default:
                 showListCustomer(request, response);
@@ -48,6 +49,7 @@ public class CustomerServlet extends HttpServlet {
                 createCustomer(request, response);
                 break;
             case "edit":
+                updateCustomer(request, response);
                 break;
         }
     }
@@ -75,6 +77,30 @@ public class CustomerServlet extends HttpServlet {
 
         Customer customer = new Customer(name, birthday, gender, idCard, phone, email, typeId, address);
         customerService.create(customer);
+        response.sendRedirect("/customer");
+    }
+
+    private void showUpdateCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id  = Integer.parseInt(request.getParameter("id"));
+        Customer customer = customerService.findById(id);
+        request.setAttribute("customer", customer);
+        request.getRequestDispatcher("/view/customer/edit.jsp").forward(request, response);
+        System.out.println(customer);
+    }
+
+    private void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        int typeId = Integer.parseInt(request.getParameter("typeId"));
+        String name = request.getParameter("name");
+        String birthday = request.getParameter("birthday");
+        String idCard = request.getParameter("idCard");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        int gender = Integer.parseInt(request.getParameter("gender"));
+
+        Customer customer = new Customer(id, name, birthday, gender, idCard, phone, email, typeId, address);
+        customerService.update(id, customer);
         response.sendRedirect("/customer");
     }
 }
