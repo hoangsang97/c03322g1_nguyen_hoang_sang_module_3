@@ -25,6 +25,11 @@
 
         a {
             text-decoration: none;
+            color: black;
+        }
+
+        a:hover {
+            color: dodgerblue;
         }
 
         .header {
@@ -47,35 +52,12 @@
         }
 
         .nav-right {
-            margin-left: 5%;
-            width: 70%;
+            width: 100%;
         }
 
         .nav-right ul {
             display: flex;
             justify-content: space-around;
-        }
-
-        .nav-left {
-
-        }
-
-        .nav-left scan {
-            position: absolute;
-            z-index: 1;
-            margin-left: 10px;
-            margin-top: 5px;
-        }
-
-        .nav-left input {
-            position: relative;
-            border-radius: 10px;
-            width: 250px;
-            padding-left: 30px;
-        }
-
-        .content {
-            padding: 20px;
         }
 
         .footer {
@@ -99,20 +81,11 @@
         <div class="nav-right">
             <ul>
                 <li><a href="">Home</a></li>
-                <li><a href="">Employee</a></li>
+                <li><a href="/employee">Employee</a></li>
                 <li><a href="/customer">Customer</a></li>
-                <li><a href="">Service</a></li>
+                <li><a href="/facility">Facility</a></li>
                 <li><a href="">Contract</a></li>
             </ul>
-        </div>
-        <div class="nav-left">
-            <scan>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-            </scan>
-            <input type="text" placeholder="Search">
         </div>
     </div>
 

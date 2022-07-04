@@ -31,6 +31,12 @@ public class CustomerServlet extends HttpServlet {
             case "edit":
                 showUpdateCustomer(request, response);
                 break;
+            case "delete":
+                deleteCustomer(request, response);
+                break;
+            case "search":
+                searchCustomer(request, response);
+                break;
             default:
                 showListCustomer(request, response);
                 break;
@@ -73,7 +79,6 @@ public class CustomerServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         int gender = Integer.parseInt(request.getParameter("gender"));
         int typeId = Integer.parseInt(request.getParameter("typeId"));
-        System.out.println("đã vào");
 
         Customer customer = new Customer(name, birthday, gender, idCard, phone, email, typeId, address);
         customerService.create(customer);
@@ -85,7 +90,6 @@ public class CustomerServlet extends HttpServlet {
         Customer customer = customerService.findById(id);
         request.setAttribute("customer", customer);
         request.getRequestDispatcher("/view/customer/edit.jsp").forward(request, response);
-        System.out.println(customer);
     }
 
     private void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -102,5 +106,18 @@ public class CustomerServlet extends HttpServlet {
         Customer customer = new Customer(id, name, birthday, gender, idCard, phone, email, typeId, address);
         customerService.update(id, customer);
         response.sendRedirect("/customer");
+    }
+
+    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        customerService.delete(id);
+        response.sendRedirect("/customer");
+    }
+
+    private void searchCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nameSearch = request.getParameter("nameSearch");
+        List<CustomerDto> customerDtoList = customerService.search(nameSearch);
+        request.setAttribute("customer", customerDtoList);
+        request.getRequestDispatcher("/view/customer/list.jsp").forward(request, response);
     }
 }

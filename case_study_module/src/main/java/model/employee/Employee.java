@@ -1,27 +1,54 @@
 package model.employee;
 
 public class Employee {
+    private int EmployeeId;
     private String employeeName;
     private String employeeBirthday;
     private String employeeIdCard;
+    private double employeeSalary;
     private String employeePhone;
     private String employeeEmail;
-    private String educationDegreeId;
-    private String positionId;
-    private double employeeSalary;
+    private String employeeAddress;
+    private int positionId;
+    private int educationDegreeId;
+    private int divisionId;
 
     public Employee() {
     }
 
-    public Employee(String employeeName, String employeeBirthday, String employeeIdCard, String employeePhone, String employeeEmail, String educationDegreeId, String positionId, double employeeSalary) {
+    public Employee(int employeeId, String employeeName, String employeeBirthday, String employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, int positionId, int educationDegreeId, int divisionId) {
+        EmployeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeBirthday = employeeBirthday;
         this.employeeIdCard = employeeIdCard;
+        this.employeeSalary = employeeSalary;
         this.employeePhone = employeePhone;
         this.employeeEmail = employeeEmail;
-        this.educationDegreeId = educationDegreeId;
+        this.employeeAddress = employeeAddress;
         this.positionId = positionId;
+        this.educationDegreeId = educationDegreeId;
+        this.divisionId = divisionId;
+    }
+
+    public Employee(String employeeName, String employeeBirthday, String employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, int positionId, int educationDegreeId, int divisionId) {
+        this.employeeName = employeeName;
+        this.employeeBirthday = employeeBirthday;
+        this.employeeIdCard = employeeIdCard;
         this.employeeSalary = employeeSalary;
+        this.employeePhone = employeePhone;
+        this.employeeEmail = employeeEmail;
+        this.employeeAddress = employeeAddress;
+        this.positionId = positionId;
+        this.educationDegreeId = educationDegreeId;
+        this.divisionId = divisionId;
+    }
+
+    public int getEmployeeId() {
+        return EmployeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        EmployeeId = employeeId;
     }
 
     public String getEmployeeName() {
@@ -48,6 +75,14 @@ public class Employee {
         this.employeeIdCard = employeeIdCard;
     }
 
+    public double getEmployeeSalary() {
+        return employeeSalary;
+    }
+
+    public void setEmployeeSalary(double employeeSalary) {
+        this.employeeSalary = employeeSalary;
+    }
+
     public String getEmployeePhone() {
         return employeePhone;
     }
@@ -64,27 +99,35 @@ public class Employee {
         this.employeeEmail = employeeEmail;
     }
 
-    public String getEducationDegreeId() {
-        return educationDegreeId;
+    public String getEmployeeAddress() {
+        return employeeAddress;
     }
 
-    public void setEducationDegreeId(String educationDegreeId) {
-        this.educationDegreeId = educationDegreeId;
+    public void setEmployeeAddress(String employeeAddress) {
+        this.employeeAddress = employeeAddress;
     }
 
-    public String getPositionId() {
+    public int getPositionId() {
         return positionId;
     }
 
-    public void setPositionId(String positionId) {
+    public void setPositionId(int positionId) {
         this.positionId = positionId;
     }
 
-    public double getEmployeeSalary() {
-        return employeeSalary;
+    public int getEducationDegreeId() {
+        return educationDegreeId;
     }
 
-    public void setEmployeeSalary(double employeeSalary) {
-        this.employeeSalary = employeeSalary;
+    public void setEducationDegreeId(int educationDegreeId) {
+        this.educationDegreeId = educationDegreeId;
+    }
+
+    public int getDivisionId() {
+        return divisionId;
+    }
+
+    public void setDivisionId(int divisionId) {
+        this.divisionId = divisionId;
     }
 }

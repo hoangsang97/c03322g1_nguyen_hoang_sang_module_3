@@ -17,17 +17,15 @@
             text-align: center;
         }
         a {
-            color: black;
-        }
-        a:hover {
-            color: dodgerblue;
+            color: white;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
 <h1>Edit Customer</h1>
 <p>
-    <a href="/customer">Back to home</a>
+    <a class="btn btn-primary" href="/customer">Back to home</a>
 </p>
 <div class="container">
     <form action="/customer?action=edit&id=${customer.getCustomerId()}" class="row g-3" method="post">

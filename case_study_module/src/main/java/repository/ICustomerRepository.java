@@ -16,5 +16,5 @@ public interface ICustomerRepository {
 
     void update(int id, Customer customer);
 
-    List<Customer> search(String name);
+    List<CustomerDto> search(String name);
 }

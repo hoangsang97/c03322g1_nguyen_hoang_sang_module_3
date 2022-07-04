@@ -16,10 +16,8 @@
             text-align: center;
         }
         a {
-            color: black;
-        }
-        a:hover {
-            color: dodgerblue;
+            text-decoration: none;
+            color: white;
         }
     </style>
 </head>
@@ -74,7 +72,7 @@
             </select>
         </div>
         <div class="col-12">
-            <input type="submit" class="btn btn-primary" value="Search">
+            <input type="submit" class="btn btn-primary" value="Create">
         </div>
     </form>
 </div>

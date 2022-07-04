@@ -62,18 +62,14 @@
             justify-content: space-around;
         }
 
-        .nav-left {
-
-        }
-
         .nav-left scan {
             position: absolute;
             z-index: 1;
             margin-left: 10px;
-            margin-top: 5px;
+            margin-top: 10px;
         }
 
-        .nav-left input {
+        .input-text {
             position: relative;
             border-radius: 10px;
             width: 250px;
@@ -82,6 +78,15 @@
 
         .content {
             padding: 20px;
+        }
+
+        .content-table {
+            border: 1px solid;
+            padding: 10px;
+        }
+
+        .bg-primary {
+            color: white;
         }
 
         .footer {
@@ -104,72 +109,109 @@
     <div class="nav">
         <div class="nav-right">
             <ul>
-                <li><a href="/home.jsp">Home</a></li>
+                <li><a href="/home">Home</a></li>
                 <li><a href="">Employee</a></li>
-                <li><a href="">Service</a></li>
+                <li><a href="/facility">facility</a></li>
                 <li><a href="">Contract</a></li>
             </ul>
         </div>
         <div class="nav-left">
-            <scan>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-            </scan>
-            <input type="text" placeholder="Search">
+            <form action="/customer" method="get">
+                <scan>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </scan>
+                <input class="input-text" type="text" placeholder="Search" name="nameSearch">
+                <input class="btn btn-primary" type="submit" name="action" value="search">
+            </form>
         </div>
     </div>
 
     <div class="main">
-        <div id="content">
+        <div class="content">
             <h1>List Customer</h1>
             <p>
-                <a href="/customer?action=create">Create Customer</a>
+                <a class="btn btn-primary" href="/customer?action=create">Create Customer</a>
             </p>
-            <table class="table">
-                <tr>
-                    <th>Id</th>
-                    <th>TypeName</th>
-                    <th>Name</th>
-                    <th>Birthday</th>
-                    <th>Gender</th>
-                    <th>IdCard</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-                <c:forEach items="${customer}" var="item">
-                    <tr>
-                        <td>${item.getCustomerId()}</td>
-                        <td>${item.getCustomerTypeName()}</td>
-                        <td>${item.getCustomerName()}</td>
-                        <td>${item.getCustomerBirthday()}</td>
-                        <c:if test="${item.getCustomerGender() == 0}">
-                            <td>Nữ</td>
-                        </c:if>
-                        <c:if test="${item.getCustomerGender() == 1}">
-                            <td>Nam</td>
-                        </c:if>
-                        <td>${item.getCustomerIdCard()}</td>
-                        <td>${item.getCustomerPhone()}</td>
-                        <td>${item.getCustomerEmail()}</td>
-                        <td>${item.getCustomerAddress()}</td>
-                        <td><a href="/customer?action=edit&id=${item.getCustomerId()}">Edit</a></td>
+            <div class="content-table">
+                <table class="table">
+                    <tr class="bg-primary">
+                        <th>Id</th>
+                        <th>TypeName</th>
+                        <th>Name</th>
+                        <th>Birthday</th>
+                        <th>Gender</th>
+                        <th>IdCard</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
-                </c:forEach>
-            </table>
+                    <c:forEach items="${customer}" var="item">
+                        <tr>
+                            <td>${item.getCustomerId()}</td>
+                            <td>${item.getCustomerTypeName()}</td>
+                            <td>${item.getCustomerName()}</td>
+                            <td>${item.getCustomerBirthday()}</td>
+                            <c:if test="${item.getCustomerGender() == 0}">
+                                <td>Nữ</td>
+                            </c:if>
+                            <c:if test="${item.getCustomerGender() == 1}">
+                                <td>Nam</td>
+                            </c:if>
+                            <td>${item.getCustomerIdCard()}</td>
+                            <td>${item.getCustomerPhone()}</td>
+                            <td>${item.getCustomerEmail()}</td>
+                            <td>${item.getCustomerAddress()}</td>
+                            <td><a class="btn btn-primary" href="/customer?action=edit&id=${item.getCustomerId()}">Edit</a></td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="objDelete('${item.getCustomerId()}', '${item.getCustomerName()}')">Delete</button>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
         </div>
     </div>
 
     <div class="footer">
         <p>Footer</p>
     </div>
+
+    <form action="/customer" method="get">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Customer</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" hidden name="id" id="idDelete">
+                        <input type="text" hidden name="action" value="delete">
+                        <span>Do you want to delete? :</span>
+                        <span id="nameDelete"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Delete">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+<script>
+    function objDelete(id, name) {
+        document.getElementById("idDelete").value = id;
+        document.getElementById("nameDelete").innerText = name;
+    }
+</script>
 </html>
