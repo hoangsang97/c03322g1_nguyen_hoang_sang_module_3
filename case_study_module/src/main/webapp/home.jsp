@@ -84,7 +84,7 @@
                 <li><a href="/employee">Employee</a></li>
                 <li><a href="/customer">Customer</a></li>
                 <li><a href="/facility">Facility</a></li>
-                <li><a href="">Contract</a></li>
+                <li><a href="/contract">Contract</a></li>
             </ul>
         </div>
     </div>

@@ -103,10 +103,8 @@ contract_start_date datetime,
 contract_end_date datetime,
 contract_deposit double,
 contract_total_money double,
-employee_id int,
 customer_id int,
 service_id int,
-foreign key (employee_id) references employee(employee_id),
 foreign key (customer_id) references customer(customer_id),
 foreign key (service_id) references service(service_id)
 );
@@ -115,7 +113,7 @@ create table attach_service (
 attach_service_id int primary key auto_increment,
 attach_service_name varchar (45),
 attach_service_cost double,
-attach_service_unit int,
+attach_service_unit varchar(45),
 attach_service_status varchar(45)
 );
 
@@ -153,7 +151,7 @@ values ('Villa Beach Front', 25000, 10000000, 10, 3, 1, 'vip', 'Có hồ bơi', 
 	   ('Room Twin 02', 3000,  900000, 2, 4, 3, 'normal', 'Có tivi', null, null);
 insert into position (position_name) values ('Lễ tân'), ('phục vụ'), ('chuyên viên'), ('giám sát'), ('quản lý'), ('giám đốc');
 insert into education_degree(education_degree_name) values ('Trung Cấp'), ('Cao Đẳng'), ('Đại Học'), ('Sau Đại Học');
-insert into division (divison_name) values ('Sale-Marketing'), ('Hành chính'), ('Phục vụ'), ('Quản lý');
+insert into division (division_name) values ('Sale-Marketing'), ('Hành chính'), ('Phục vụ'), ('Quản lý');
 insert into employee (employee_name, employee_birthday, employee_id_card, employee_salary, employee_phone, employee_email, employee_address, position_id, education_degree_id, division_id)
 values ('Nguyễn Văn An', '1970-11-07', '456231786', 10000000, 0901234121, 'annguyen@gmail.com', '295 Nguyễn Tất Thành, Đà Nẵng', 1, 3, 1),
 ('Lê Văn Bình', '1997-04-09', '654231234', 7000000, 0934212314, 'binhlv@gmail.com', '22 Yên Bái, Đà Nẵng', 1, 2, 2),
@@ -165,3 +163,23 @@ values ('Nguyễn Văn An', '1970-11-07', '456231786', 10000000, 0901234121, 'an
 ('Nguyễn Hà Đông','1989-09-03', 234414123, 9000000, 0642123111, 'donghanguyen@gmail.com', '111 Hùng Vương, Hà Nội', 2, 4, 4),
 ('Tòng Hoang','1982-09-03', 256781231, 6000000, 0245144444, 'hoangtong@gmail.com', '213 Hàm Nghi, Đà Nẵng', 2, 4, 4),
 ('Nguyễn Công Đạo','1994-01-08', 755434343, 8000000, 0988767111, 'nguyencongdao12@gmail.com', '6 Hoà Khánh, Đồng Nai', 2, 3, 2);
+insert into contract(contract_start_date, contract_end_date, contract_deposit, customer_id, service_id) 
+values ('2020-12-08', '2020-12-08', 0, 1, 3),
+           ('2020-07-14', '2020-07-21', 200000, 3, 1),
+           ('2021-03-15', '2021-03-17', 50000, 4, 2),
+           ('2021-01-14', '2021-01-18', 100000, 5, 5),
+           ('2021-07-14', '2021-07-15', 0, 2, 6),
+           ('2021-06-01', '2021-06-03', 0, 7, 6),
+           ('2021-09-02', '2021-09-05', 100000, 4, 4),
+           ('2021-06-17', '2021-06-18', 150000, 4, 1),
+           ('2020-11-19', '2020-11-19', 0, 4,  3),
+           ('2021-04-12', '2021-04-14', 0, 3, 5),
+           ('2021-04-25', '2021-04-25', 0, 2, 1),
+           ('2021-05-25', '2021-05-27', 0, 10, 1);
+insert into attach_service(attach_service_name, attach_service_cost, attach_service_unit, attach_service_status)
+values ('Karaoke', 10000, 'giờ', 'tiện nghi, hiện tại'),
+	   ('Thuê xe máy', 10000, 'chiếc', 'hỏng 1 xe'),
+	   ('Thuê xe đạp', 20000, 'chiếc', 'tốt'),
+	   ('Buffet buổi sáng', 15000, 'suất', 'đầy đủ đồ ăn, tráng miệng'),
+	   ('Buffet buổi trưa', 90000, 'suất', 'đầy đủ đồ ăn, tráng miệng'),
+	   ('Buffet buổi tối', 16000, 'suất', 'đầy đủ đồ ăn, tráng miệng');

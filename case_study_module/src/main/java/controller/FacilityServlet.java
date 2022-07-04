@@ -1,14 +1,16 @@
 package controller;
 
+import dto.CustomerDto;
 import dto.FacilityDto;
 import model.facility.Facility;
-import model.facility.Villa;
 import service.IFacilityService;
 import service.impl.FacilityService;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -65,25 +67,62 @@ public class FacilityServlet extends HttpServlet {
     }
 
     private void showCreateFacility(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int createId = Integer.parseInt(request.getParameter("createId"));
+        request.setAttribute("createId", createId);
         request.getRequestDispatcher("/view/facility/create.jsp").forward(request, response);
     }
 
     private void createFacility(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String name = request.getParameter("name");
-        int area = Integer.parseInt(request.getParameter("area"));
-        double cost = Double.parseDouble(request.getParameter("cost"));
-        int maxPeople = Integer.parseInt(request.getParameter("maxPeople"));
-        int renTypeId = Integer.parseInt(request.getParameter("renTypeId"));
-        int serviceTypeId = 1;
-        String standardRoom = request.getParameter("standardRoom");
-        String descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
-        double poolArea = Double.parseDouble(request.getParameter("poolArea"));
-        int numberOfFloors = Integer.parseInt(request.getParameter("numberOfFloors"));
-        String facilityFree = request.getParameter("facilityFree");
+        int createId = Integer.parseInt(request.getParameter("createId"));
+        if (createId == 1) {
+            String name = request.getParameter("name");
+            int area = Integer.parseInt(request.getParameter("area"));
+            double cost = Double.parseDouble(request.getParameter("cost"));
+            int maxPeople = Integer.parseInt(request.getParameter("maxPeople"));
+            int renTypeId = Integer.parseInt(request.getParameter("renTypeId"));
+            int serviceTypeId = 1;
+            String standardRoom = request.getParameter("standardRoom");
+            String descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
+            double poolArea = Double.parseDouble(request.getParameter("poolArea"));
+            int numberOfFloors = Integer.parseInt(request.getParameter("numberOfFloors"));
+            String facilityFree = null;
 
-        Facility facility = new Facility(name, area, cost, maxPeople, renTypeId, serviceTypeId, standardRoom, descriptionOtherConvenience, poolArea, numberOfFloors, facilityFree);
-        facilityService.create(facility);
-        response.sendRedirect("/facility");
+            Facility facility = new Facility(name, area, cost, maxPeople, renTypeId, serviceTypeId, standardRoom, descriptionOtherConvenience, poolArea, numberOfFloors, facilityFree);
+            facilityService.create(facility);
+            response.sendRedirect("/facility");
+        } else if (createId == 2) {
+            String name = request.getParameter("name");
+            int area = Integer.parseInt(request.getParameter("area"));
+            double cost = Double.parseDouble(request.getParameter("cost"));
+            int maxPeople = Integer.parseInt(request.getParameter("maxPeople"));
+            int renTypeId = Integer.parseInt(request.getParameter("renTypeId"));
+            int serviceTypeId = 2;
+            String standardRoom = request.getParameter("standardRoom");
+            String descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
+            double poolArea = 0;
+            int numberOfFloors = Integer.parseInt(request.getParameter("numberOfFloors"));
+            String facilityFree = null;
+
+            Facility facility = new Facility(name, area, cost, maxPeople, renTypeId, serviceTypeId, standardRoom, descriptionOtherConvenience, poolArea, numberOfFloors, facilityFree);
+            facilityService.create(facility);
+            response.sendRedirect("/facility");
+        } else if (createId == 3) {
+            String name = request.getParameter("name");
+            int area = Integer.parseInt(request.getParameter("area"));
+            double cost = Double.parseDouble(request.getParameter("cost"));
+            int maxPeople = Integer.parseInt(request.getParameter("maxPeople"));
+            int renTypeId = Integer.parseInt(request.getParameter("renTypeId"));
+            int serviceTypeId = 3;
+            String standardRoom = null;
+            String descriptionOtherConvenience = null;
+            double poolArea = 0;
+            int numberOfFloors = 0;
+            String facilityFree = request.getParameter("facilityFree");
+
+            Facility facility = new Facility(name, area, cost, maxPeople, renTypeId, serviceTypeId, standardRoom, descriptionOtherConvenience, poolArea, numberOfFloors, facilityFree);
+            facilityService.create(facility);
+            response.sendRedirect("/facility");
+        }
     }
 
     private void showUpdateFacility(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

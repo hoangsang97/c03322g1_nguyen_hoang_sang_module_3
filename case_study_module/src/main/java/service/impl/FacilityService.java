@@ -2,7 +2,6 @@ package service.impl;
 
 import dto.FacilityDto;
 import model.facility.Facility;
-import model.facility.Villa;
 import repository.IFacilityRepository;
 import repository.impl.FacilityRepository;
 import service.IFacilityService;

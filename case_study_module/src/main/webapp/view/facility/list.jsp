@@ -111,7 +111,6 @@
             <ul>
                 <li><a href="/home">Home</a></li>
                 <li><a href="">Employee</a></li>
-                <li><a href="/service">Service</a></li>
                 <li><a href="">Contract</a></li>
             </ul>
         </div>
@@ -133,7 +132,12 @@
         <div class="content">
             <h1>List Facility</h1>
             <p>
-                <a class="btn btn-primary" href="/facility?action=create">Create Villa</a>
+                <select aria-label="Default select example" onchange="createFacility(this)">
+                    <option selected>Create Facility</option>
+                    <option value="1">Villa</option>
+                    <option value="2">House</option>
+                    <option value="3">Room</option>
+                </select>
             </p>
             <div class="content-table">
                 <table class="table">
@@ -155,18 +159,18 @@
                     </tr>
                     <c:forEach items="${facility}" var="item">
                         <tr>
-<%--                            <td>${item.getServiceId()}</td>--%>
-<%--                            <td>${item.getServiceName()}</td>--%>
-<%--                            <td>${item.getServiceArea()}</td>--%>
-<%--                            <td>${item.getServiceCost()}</td>--%>
-<%--                            <td>${item.getServiceMaxPeople()}</td>--%>
-<%--                            <td>${item.getRentTypeName()}</td>--%>
-<%--                            <td>${item.getServiceTypeName()}</td>--%>
-<%--                            <td>${item.getStandardRoom()}</td>--%>
-<%--                            <td>${item.getDescriptionOtherConvenience()}</td>--%>
-<%--                            <td>${item.getPoolArea()}</td>--%>
-<%--                            <td>${item.getNumberOfFloors()}</td>--%>
-<%--                            <td>${item.getFacilityFree()}</td>--%>
+                            <td>${item.getServiceId()}</td>
+                            <td>${item.getServiceName()}</td>
+                            <td>${item.getServiceArea()}</td>
+                            <td>${item.getServiceCost()}</td>
+                            <td>${item.getServiceMaxPeople()}</td>
+                            <td>${item.getRentTypeName()}</td>
+                            <td>${item.getServiceTypeName()}</td>
+                            <td>${item.getStandardRoom()}</td>
+                            <td>${item.getDescriptionOtherConvenience()}</td>
+                            <td>${item.getPoolArea()}</td>
+                            <td>${item.getNumberOfFloors()}</td>
+                            <td>${item.getFacilityFree()}</td>
                             <td><a class="btn btn-primary" href="/facility?action=edit&id=${item.getServiceId()}">Edit</a></td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="objDelete('${item.getServiceId()}', '${item.getServiceName()}')">Delete</button>
@@ -213,6 +217,17 @@
     function objDelete(id, name) {
         document.getElementById("idDelete").value = id;
         document.getElementById("nameDelete").innerText = name;
+    }
+
+    function createFacility(obj) {
+        var value = obj.value;
+        if (value == 1) {
+            window.location.replace("http://localhost:8080/facility?action=create&createId=1");
+        } else if (value == 2) {
+            window.location.replace("http://localhost:8080/facility?action=create&createId=2");
+        } else if (value == 3) {
+            window.location.replace("http://localhost:8080/facility?action=create&createId=3");
+        }
     }
 </script>
 </html>

@@ -1,8 +1,6 @@
 package repository.impl;
 
-import dto.CustomerDto;
 import dto.EmployeeDto;
-import model.customer.Customer;
 import model.employee.Employee;
 import repository.IEmployeeRepository;
 

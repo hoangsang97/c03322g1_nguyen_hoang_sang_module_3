@@ -67,7 +67,7 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private void showCreateCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/view/customer/create.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/customer/createVilla.jsp").forward(request, response);
     }
 
     private void createCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {

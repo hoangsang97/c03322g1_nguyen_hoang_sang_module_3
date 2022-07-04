@@ -13,22 +13,22 @@ import java.util.List;
 
 public class FacilityRepository implements IFacilityRepository {
     private static List<FacilityDto> facilityDtoList = new ArrayList<>();
-    private static final String FIND_ALL = " select s.service_id, s.service_name, s.service_area, s.service_cost, s.service_max_people, r.rent_type_name, st.service_type_name, s.standard_room, s.description_other_convenience, s.pool_area, s.number_of_floors, s.facility_free from service s " +
+    private static final String FIND_ALL = " select s.service_id, s.service_name, s.service_area, s.service_cost, s.service_max_people, r.rent_type_name, st.service_type_name, s.standard_room, s.description_other_convenience, s.pool_area, s.number_of_floors, s.facility_free  from service s " +
             " join rent_type r on s.rent_type_id = r.rent_type_id " +
             " join service_type st on s.service_type_id = st.service_type_id " +
             " order by s.service_id ";
     private static final String FIND_BY_ID = " select * from service where service_id = ? ";
     private static final String INSERT = " insert into service(service_name, service_area, service_cost, service_max_people, rent_type_id, service_type_id, standard_room, \n" +
-            " description_other_convenience, pool_area, number_of_floors) " +
-            " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+            " description_other_convenience, pool_area, number_of_floors, facility_free) " +
+            " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
     private static final String DELETE = " delete from service where service_id = ? ";
     private static final String UPDATE = " update service set service_name = ?, service_area = ?, service_cost = ?, service_max_people = ?, rent_type_id = ?, service_type_id = ?, standard_room = ?, " +
-            " description_other_convenience = ?, pool_area = ?, number_of_floors = ? " +
+            " description_other_convenience = ?, pool_area = ?, number_of_floors = ?, facility_free = ? " +
             " where service_id = ? ";
-    private static final String SEARCH = " select s.service_id, s.service_name, s.service_area, s.service_cost, s.service_max_people, r.rent_type_name, st.service_type_name, s.standard_room, s.description_other_convenience, s.pool_area, s.number_of_floors from service s " +
+    private static final String SEARCH = " select s.service_id, s.service_name, s.service_area, s.service_cost, s.service_max_people, r.rent_type_name, st.service_type_name, s.standard_room, s.description_other_convenience, s.pool_area, s.number_of_floors, s.facility_free from service s " +
             " join rent_type r on s.rent_type_id = r.rent_type_id " +
             " join service_type st on s.service_type_id = st.service_type_id " +
-            " where st.service_type_name = 'Villa' and s.service_name like ? " +
+            " where s.service_name like ? " +
             " order by s.service_id ";
 
     @Override
@@ -52,8 +52,7 @@ public class FacilityRepository implements IFacilityRepository {
                 double poolArea = Double.parseDouble(resultSet.getString("pool_area"));
                 int numberOfFloors = Integer.parseInt(resultSet.getString("number_of_floors"));
                 String facilityFree = resultSet.getString("facility_free");
-                facilityDto = new FacilityDto(serviceId, serviceName, serviceArea, serviceCost, serviceMaxPeople, rentTypeName, serviceTypeName, standardRoom,
-                        descriptionOtherConvenience, poolArea, numberOfFloors, facilityFree);
+                facilityDto = new FacilityDto(serviceId, serviceName, serviceArea, serviceCost, serviceMaxPeople, rentTypeName, serviceTypeName, standardRoom, descriptionOtherConvenience, poolArea, numberOfFloors, facilityFree);
                 facilityDtoList.add(facilityDto);
             }
 
@@ -109,6 +108,7 @@ public class FacilityRepository implements IFacilityRepository {
             preparedStatement.setString(8, facility.getDescriptionOtherConvenience());
             preparedStatement.setDouble(9, facility.getPoolArea());
             preparedStatement.setInt(10, facility.getNumberOfFloors());
+            preparedStatement.setString(11, facility.getFacilityFree());
 
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
@@ -143,7 +143,8 @@ public class FacilityRepository implements IFacilityRepository {
             preparedStatement.setString(8, facility.getDescriptionOtherConvenience());
             preparedStatement.setDouble(9, facility.getPoolArea());
             preparedStatement.setInt(10, facility.getNumberOfFloors());
-            preparedStatement.setInt(11, facility.getServiceId());
+            preparedStatement.setString(11, facility.getFacilityFree());
+            preparedStatement.setInt(12, facility.getServiceId());
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
