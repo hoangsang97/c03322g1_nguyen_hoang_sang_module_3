@@ -27,7 +27,7 @@ public class CustomerRepository implements ICustomerRepository {
     private static final String SEARCH = " select c.customer_id, ct.customer_type_name, c.customer_name, c.customer_birthday, c.customer_gender, c.customer_id_card, c.customer_phone, c.customer_email, c.customer_address " +
             " from customer c " +
             " join customer_type ct on c.customer_type_id = ct.customer_type_id " +
-            " where c.customer_name like ? and status = 0 " +
+            " where c.customer_name like ? and c.customer_id like ? and c.customer_email like ? and status = 0 " +
             " order by c.customer_id ";
 
     @Override
@@ -138,12 +138,14 @@ public class CustomerRepository implements ICustomerRepository {
     }
 
     @Override
-    public List<CustomerDto> search(String name) {
+    public List<CustomerDto> search(String name, String id, String email) {
         Connection connection = new BaseRepository().getConnection();
         customerDtoList.clear();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH);
             preparedStatement.setString(1, "%" + name + "%");
+            preparedStatement.setString(2, "%" + id + "%");
+            preparedStatement.setString(3, "%" + email + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
             CustomerDto customerDto = null;
             while (resultSet.next()) {

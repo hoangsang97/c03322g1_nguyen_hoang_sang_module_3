@@ -30,7 +30,31 @@ public class CustomerService implements ICustomerService {
         if (customer.getCustomerName().equals("")) {
             errors.put("errName", "Ten khong duoc de trong");
         } else if (!CheckRegex.checkName(customer.getCustomerName())) {
-            errors.put("errName", "Ten khong duoc chua ky tu dac biet");
+            errors.put("errName", "Chữ cái đàu phải viết hoa");
+        }
+
+        if (customer.getCustomerPhone().equals("")) {
+            errors.put("errPhone", "Sđt Không được để rỗng");
+        } else if (!CheckRegex.checkPhone(customer.getCustomerPhone())) {
+            errors.put("errPhone", "đầu số phải là 090 | 080");
+        }
+
+        if (customer.getCustomerIdCard().equals("")) {
+            errors.put("errIdCard", "Không được để rỗng idCard");
+        } else if (!CheckRegex.checkIdCard(customer.getCustomerIdCard())) {
+            errors.put("errIdCard", "Id Card phải có 9 số");
+        }
+
+        if (customer.getCustomerBirthday().equals("")) {
+            errors.put("errBirthday", "ngày sinh không đươc rỗng");
+        } else if (!CheckRegex.checkBirthday(customer.getCustomerBirthday())) {
+            errors.put("errBirthday", "nhập không đúng định dạng YYYY/MM/DD");
+        }
+
+        if (customer.getCustomerEmail().equals("")) {
+            errors.put("errEmail", "email không đươc rỗng");
+        } else if (!CheckRegex.checkEmail(customer.getCustomerEmail())) {
+            errors.put("errEmail", "nhập không đúng định dạng email@xyz.com");
         }
 
         if (errors.isEmpty()) {
@@ -50,7 +74,7 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public List<CustomerDto> search(String name) {
-        return customerRepository.search(name);
+    public List<CustomerDto> search(String name , String id, String email) {
+        return customerRepository.search(name, id, email);
     }
 }

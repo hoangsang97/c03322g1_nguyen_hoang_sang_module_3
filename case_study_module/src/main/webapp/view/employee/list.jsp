@@ -13,8 +13,8 @@
     <title>List Employee</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="bootstrap413/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="datatables/css/dataTables.bootstrap4.min.css"/>
+    <link rel="stylesheet" href="/bootstrap413/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/datatables/css/dataTables.bootstrap4.min.css"/>
     <style>
         * {
             box-sizing: border-box;
@@ -288,9 +288,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-<script src="jquery/jquery-3.5.1.min.js"></script>
-<script src="datatables/js/jquery.dataTables.min.js"></script>
-<script src="datatables/js/dataTables.bootstrap4.min.js"></script>
+<script src="/jquery/jquery-3.5.1.min.js"></script>
+<script src="/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/datatables/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#tableStudent').dataTable({

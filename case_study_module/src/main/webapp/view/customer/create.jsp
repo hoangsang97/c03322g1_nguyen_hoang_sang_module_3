@@ -37,14 +37,17 @@
             <label class="form-label">Birthday</label>
             <input type="text" class="form-control" name="birthday">
         </div>
+        <div class="text-danger">${error.errBirthday}</div>
         <div class="col-12">
             <label class="form-label">IdCard</label>
             <input type="text" class="form-control" name="idCard">
         </div>
+        <div class="text-danger">${error.errIdCard}</div>
         <div class="col-12">
             <label class="form-label">Email</label>
             <input type="email" class="form-control" name="email">
         </div>
+        <div class="text-danger">${error.errEmail}</div>
         <div class="col-12">
             <label class="form-label">Address</label>
             <input type="text" class="form-control" name="address">
@@ -53,6 +56,7 @@
             <label class="form-label">Phone</label>
             <input type="text" class="form-control" name="phone">
         </div>
+        <div class="text-danger">${error.errPhone}</div>
         <div class="col-md-4">
             <label class="form-label">Gender</label>
             <select class="form-select" name="gender">

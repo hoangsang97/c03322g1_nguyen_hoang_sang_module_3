@@ -123,7 +123,10 @@ public class CustomerServlet extends HttpServlet {
 
     private void searchCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nameSearch = request.getParameter("nameSearch");
-        List<CustomerDto> customerDtoList = customerService.search(nameSearch);
+        String idSearch = request.getParameter("idSearch");
+        String emailSearch = request.getParameter("emailSearch");
+
+        List<CustomerDto> customerDtoList = customerService.search(nameSearch, idSearch, emailSearch);
         request.setAttribute("customer", customerDtoList);
         request.getRequestDispatcher("/view/customer/list.jsp").forward(request, response);
     }

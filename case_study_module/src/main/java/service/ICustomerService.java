@@ -16,5 +16,5 @@ public interface ICustomerService {
 
     void update(int id, Customer customer);
 
-    List<CustomerDto> search(String name);
+    List<CustomerDto> search(String name, String id, String email);
 }
