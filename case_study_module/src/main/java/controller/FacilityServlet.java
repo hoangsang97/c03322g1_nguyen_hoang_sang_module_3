@@ -139,12 +139,28 @@ public class FacilityServlet extends HttpServlet {
         double cost = Double.parseDouble(request.getParameter("cost"));
         int maxPeople = Integer.parseInt(request.getParameter("maxPeople"));
         int renTypeId = Integer.parseInt(request.getParameter("renTypeId"));
-        int serviceTypeId = 1;
-        String standardRoom = request.getParameter("standardRoom");
-        String descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
-        double poolArea = Double.parseDouble(request.getParameter("poolArea"));
-        int numberOfFloors = Integer.parseInt(request.getParameter("numberOfFloors"));
-        String facilityFree = request.getParameter("facilityFree");
+        int serviceTypeId = 0;
+        String standardRoom = null;
+        String descriptionOtherConvenience = null;
+        double poolArea = 0;
+        int numberOfFloors = 0;
+        String facilityFree = null;
+        int editId = Integer.parseInt(request.getParameter("editId"));
+        if (editId == 1) {
+            serviceTypeId = 1;
+            standardRoom = request.getParameter("standardRoom");
+            descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
+            poolArea = Double.parseDouble(request.getParameter("poolArea"));
+            numberOfFloors = Integer.parseInt(request.getParameter("numberOfFloors"));
+        } else if (editId == 2) {
+            serviceTypeId = 2;
+            standardRoom = request.getParameter("standardRoom");
+            descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
+            numberOfFloors = Integer.parseInt(request.getParameter("numberOfFloors"));
+        } else if (editId == 3) {
+            serviceTypeId = 3;
+            facilityFree = request.getParameter("facilityFree");
+        }
 
         Facility facility = new Facility(id, name, area, cost, maxPeople, renTypeId, serviceTypeId, standardRoom, descriptionOtherConvenience, poolArea, numberOfFloors, facilityFree);
         facilityService.update(id, facility);

@@ -95,6 +95,9 @@
         }
     </style>
 </head>
+<%
+    int editId = 0;
+%>
 <body>
 <div class="container-fluid">
     <div class="header">
@@ -110,8 +113,9 @@
         <div class="nav-right">
             <ul>
                 <li><a href="/home">Home</a></li>
-                <li><a href="">Employee</a></li>
-                <li><a href="">Contract</a></li>
+                <li><a href="/customer">Customer</a></li>
+                <li><a href="/employee">Employee</a></li>
+                <li><a href="/contract">Contract</a></li>
             </ul>
         </div>
         <div class="nav-left">
@@ -166,12 +170,23 @@
                             <td>${item.getServiceMaxPeople()}</td>
                             <td>${item.getRentTypeName()}</td>
                             <td>${item.getServiceTypeName()}</td>
+                            <div style="display: none">
+                                <c:if test="${item.getServiceTypeName() == 'Villa'}">
+                                    <%=editId = 1%>
+                                </c:if>
+                                <c:if test="${item.getServiceTypeName() == 'House'}">
+                                    <%=editId = 2%>
+                                </c:if>
+                                <c:if test="${item.getServiceTypeName() == 'Room'}">
+                                    <%=editId = 3%>
+                                </c:if>
+                            </div>
                             <td>${item.getStandardRoom()}</td>
                             <td>${item.getDescriptionOtherConvenience()}</td>
                             <td>${item.getPoolArea()}</td>
                             <td>${item.getNumberOfFloors()}</td>
                             <td>${item.getFacilityFree()}</td>
-                            <td><a class="btn btn-primary" href="/facility?action=edit&id=${item.getServiceId()}">Edit</a></td>
+                            <td><a class="btn btn-primary" href="/facility?action=edit&id=${item.getServiceId()}&editId=<%=editId%>">Edit</a></td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="objDelete('${item.getServiceId()}', '${item.getServiceName()}')">Delete</button>
                             </td>

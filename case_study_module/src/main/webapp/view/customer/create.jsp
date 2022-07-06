@@ -24,7 +24,7 @@
 <body>
 <h1>Create Customer</h1>
 <p>
-    <a href="/customer">Back to home</a>
+    <a class="btn btn-primary" href="/customer">Back to home</a>
 </p>
 <div class="container">
     <form action="/customer?action=create" class="row g-3" method="post">
@@ -32,6 +32,7 @@
             <label class="form-label">Name</label>
             <input type="text" class="form-control" name="name">
         </div>
+        <div class="text-danger">${error.errName}</div>
         <div class="col-12">
             <label class="form-label">Birthday</label>
             <input type="text" class="form-control" name="birthday">

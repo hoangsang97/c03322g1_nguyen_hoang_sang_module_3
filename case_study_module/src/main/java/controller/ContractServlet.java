@@ -2,8 +2,6 @@ package controller;
 
 import dto.ContractDto;
 import model.contract.AttachService;
-import model.contract.Contract;
-import model.employee.Employee;
 import service.IContractService;
 import service.impl.ContractService;
 
@@ -33,6 +31,9 @@ public class ContractServlet extends HttpServlet {
             case "createContractDetail":
                 showCreateContractDetail(request, response);
                 break;
+            case "showAttachContract":
+                showAttachContract(request, response);
+                break;
             default:
                 showListContract(request, response);
                 break;
@@ -50,6 +51,9 @@ public class ContractServlet extends HttpServlet {
             case "createAttachService":
                 createAttachService(request, response);
                 break;
+            case "createContractDetail":
+                createContractDetail(request, response);
+                break;
         }
     }
 
@@ -66,7 +70,7 @@ public class ContractServlet extends HttpServlet {
     private void createAttachService(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
         double cost = Double.parseDouble(request.getParameter("cost"));
-        int unit = Integer.parseInt(request.getParameter("unit"));
+        String unit = request.getParameter("unit");
         String status = request.getParameter("status");
 
         AttachService attachService = new AttachService(name, cost, unit, status);
@@ -75,6 +79,23 @@ public class ContractServlet extends HttpServlet {
     }
 
     private void showCreateContractDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<AttachService> attachServiceList = contractService.findAllAttach();
+        List<ContractDto> contractDtoList = contractService.findAll();
+        request.setAttribute("attach", attachServiceList);
+        request.setAttribute("contract", contractDtoList);
         request.getRequestDispatcher("/view/contract/createContractDetail.jsp").forward(request, response);
+    }
+
+    private void createContractDetail(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
+    private void showAttachContract(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("contractId"));
+        List<ContractDto> contractDtoList = contractService.findAll();
+        request.setAttribute("contract", contractDtoList);
+        List<AttachService> attachServiceList = contractService.findAllAttachContract(id);
+        request.setAttribute("attachService", attachServiceList);
+        request.getRequestDispatcher("/view/contract/list.jsp").forward(request, response);
     }
 }

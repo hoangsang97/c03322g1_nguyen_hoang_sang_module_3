@@ -16,19 +16,20 @@ public class FacilityRepository implements IFacilityRepository {
     private static final String FIND_ALL = " select s.service_id, s.service_name, s.service_area, s.service_cost, s.service_max_people, r.rent_type_name, st.service_type_name, s.standard_room, s.description_other_convenience, s.pool_area, s.number_of_floors, s.facility_free  from service s " +
             " join rent_type r on s.rent_type_id = r.rent_type_id " +
             " join service_type st on s.service_type_id = st.service_type_id " +
+            " where s.status = 0 " +
             " order by s.service_id ";
-    private static final String FIND_BY_ID = " select * from service where service_id = ? ";
+    private static final String FIND_BY_ID = " select * from service where service_id = ? and status = 0 ";
     private static final String INSERT = " insert into service(service_name, service_area, service_cost, service_max_people, rent_type_id, service_type_id, standard_room, \n" +
             " description_other_convenience, pool_area, number_of_floors, facility_free) " +
             " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
-    private static final String DELETE = " delete from service where service_id = ? ";
+    private static final String DELETE = " update service set `status` = 1 where service_id = ? ";
     private static final String UPDATE = " update service set service_name = ?, service_area = ?, service_cost = ?, service_max_people = ?, rent_type_id = ?, service_type_id = ?, standard_room = ?, " +
             " description_other_convenience = ?, pool_area = ?, number_of_floors = ?, facility_free = ? " +
             " where service_id = ? ";
     private static final String SEARCH = " select s.service_id, s.service_name, s.service_area, s.service_cost, s.service_max_people, r.rent_type_name, st.service_type_name, s.standard_room, s.description_other_convenience, s.pool_area, s.number_of_floors, s.facility_free from service s " +
             " join rent_type r on s.rent_type_id = r.rent_type_id " +
             " join service_type st on s.service_type_id = st.service_type_id " +
-            " where s.service_name like ? " +
+            " where s.service_name like ? and s.status = 0 " +
             " order by s.service_id ";
 
     @Override
@@ -49,8 +50,8 @@ public class FacilityRepository implements IFacilityRepository {
                 String serviceTypeName = resultSet.getString("service_type_name");
                 String standardRoom = resultSet.getString("standard_room");
                 String descriptionOtherConvenience = resultSet.getString("description_other_convenience");
-                double poolArea = Double.parseDouble(resultSet.getString("pool_area"));
-                int numberOfFloors = Integer.parseInt(resultSet.getString("number_of_floors"));
+                double poolArea = resultSet.getDouble("pool_area");
+                int numberOfFloors = resultSet.getInt("number_of_floors");
                 String facilityFree = resultSet.getString("facility_free");
                 facilityDto = new FacilityDto(serviceId, serviceName, serviceArea, serviceCost, serviceMaxPeople, rentTypeName, serviceTypeName, standardRoom, descriptionOtherConvenience, poolArea, numberOfFloors, facilityFree);
                 facilityDtoList.add(facilityDto);
@@ -82,8 +83,8 @@ public class FacilityRepository implements IFacilityRepository {
                 int serviceTypeId = Integer.parseInt(resultSet.getString("service_type_id"));
                 String standardRoom = resultSet.getString("standard_room");
                 String descriptionOtherConvenience = resultSet.getString("description_other_convenience");
-                double poolArea = Double.parseDouble(resultSet.getString("pool_area"));
-                int numberOfFloors = Integer.parseInt(resultSet.getString("number_of_floors"));
+                double poolArea = resultSet.getDouble("pool_area");
+                int numberOfFloors = resultSet.getInt("number_of_floors");
                 String facilityFree = resultSet.getString("facility_free");
                 facility = new Facility(serviceId, serviceName, serviceArea, serviceCost, serviceMaxPeople, rentTypeId, serviceTypeId, standardRoom, descriptionOtherConvenience, poolArea, numberOfFloors, facilityFree);
             }

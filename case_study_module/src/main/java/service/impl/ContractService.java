@@ -17,13 +17,8 @@ public class ContractService implements IContractService {
     }
 
     @Override
-    public Contract findById(int id) {
-        return contractRepository.findById(id);
-    }
-
-    @Override
-    public void create(Contract contract) {
-        contractRepository.create(contract);
+    public List<AttachService> findAllAttach() {
+        return contractRepository.findAllAttach();
     }
 
     @Override
@@ -32,17 +27,12 @@ public class ContractService implements IContractService {
     }
 
     @Override
-    public void delete(int id) {
-        contractRepository.delete(id);
-    }
-
-    @Override
-    public void update(int id, Contract contract) {
-        contractRepository.update(id, contract);
-    }
-
-    @Override
     public List<ContractDto> search(String name) {
         return contractRepository.search(name);
+    }
+
+    @Override
+    public List<AttachService> findAllAttachContract(int id) {
+        return contractRepository.findAllAttachContract(id);
     }
 }

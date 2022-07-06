@@ -15,17 +15,19 @@ public class CustomerRepository implements ICustomerRepository {
     public static List<CustomerDto> customerDtoList = new ArrayList<>();
     private static final String FIND_ALL = " select c.customer_id, ct.customer_type_name, c.customer_name, c.customer_birthday, c.customer_gender, c.customer_id_card, c.customer_phone, c.customer_email, c.customer_address " +
             " from customer c " +
-            " join customer_type ct on c.customer_type_id = ct.customer_type_id order by c.customer_id ";
-    private static final String FIND_BY_ID = " select * from customer where customer_id = ? ";
+            " join customer_type ct on c.customer_type_id = ct.customer_type_id " +
+            " where c.status = 0 " +
+            " order by c.customer_id ";
+    private static final String FIND_BY_ID = " select * from customer where customer_id = ? and status = 0 ";
     private static final String INSERT = " insert into customer(customer_type_id, customer_name, customer_birthday, customer_gender, customer_id_card, customer_phone, customer_email, customer_address) " +
             " values (?, ?, ?, ?, ?, ?, ?, ?) ";
     private static final String UPDATE = " update customer set customer_type_id = ?, customer_name = ?, customer_birthday = ?, customer_gender = ?, customer_id_card = ?, customer_phone = ?, customer_email = ?, customer_address = ? " +
             " where customer_id = ? ";
-    private static final String DELETE = " delete from customer where customer_id = ? ";
+    private static final String DELETE = " update customer set `status` = 1 where customer_id = ? ";
     private static final String SEARCH = " select c.customer_id, ct.customer_type_name, c.customer_name, c.customer_birthday, c.customer_gender, c.customer_id_card, c.customer_phone, c.customer_email, c.customer_address " +
             " from customer c " +
             " join customer_type ct on c.customer_type_id = ct.customer_type_id " +
-            " where c.customer_name like ? " +
+            " where c.customer_name like ? and status = 0 " +
             " order by c.customer_id ";
 
     @Override

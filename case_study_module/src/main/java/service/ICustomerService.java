@@ -2,15 +2,15 @@ package service;
 
 import dto.CustomerDto;
 import model.customer.Customer;
-
 import java.util.List;
+import java.util.Map;
 
 public interface ICustomerService {
     List<CustomerDto> findAll();
 
     Customer findById(int id);
 
-    void create(Customer customer);
+    Map<String, String> create(Customer customer);
 
     void delete(int id);
 

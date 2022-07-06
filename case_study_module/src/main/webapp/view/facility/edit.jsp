@@ -22,13 +22,37 @@
         }
     </style>
 </head>
+<%
+    int editId = Integer.parseInt(request.getParameter("editId"));
+    int id = Integer.parseInt(request.getParameter("id"));
+%>
 <body>
 <h1>Edit Facility</h1>
 <p>
     <a class="btn btn-primary" href="/facility">Back to Facility</a>
 </p>
 <div class="container">
-    <form action="/facility?action=edit&id=${facility.getServiceId()}" class="row g-3" method="post">
+    <form action="/facility?action=edit&editId=<%=editId%>&id=${facility.getServiceId()}" class="row g-3" method="post">
+        <div class="col-md-3">
+            <label class="form-label">Facility Type</label>
+            <select class="form-select" name="serviceTypeId" onchange="createFacility(this)">
+                <c:if test="<%=editId == 1%>">
+                    <option value="1" selected>Villa</option>
+                    <option value="2">House</option>
+                    <option value="3">Room</option>
+                </c:if>
+                <c:if test="<%=editId == 2%>">
+                    <option value="1">Villa</option>
+                    <option value="2" selected>House</option>
+                    <option value="3">Room</option>
+                </c:if>
+                <c:if test="<%=editId == 3%>">
+                    <option value="1">Villa</option>
+                    <option value="2">House</option>
+                    <option value="3" selected>Room</option>
+                </c:if>
+            </select>
+        </div>
         <div class="col-12">
             <label class="form-label">Name</label>
             <input type="text" class="form-control" name="name" value="${facility.getServiceName()}">
@@ -74,26 +98,44 @@
                 </c:if>
             </select>
         </div>
-        <div class="col-12">
-            <label class="form-label">Standard Room</label>
-            <input type="text" class="form-control" name="standardRoom" value="${facility.getStandardRoom()}">
-        </div>
-        <div class="col-12">
-            <label class="form-label">Description Other Convenience</label>
-            <input type="text" class="form-control" name="descriptionOtherConvenience" value="${facility.getDescriptionOtherConvenience()}">
-        </div>
-        <div class="col-12">
-            <label class="form-label">Pool Area</label>
-            <input type="text" class="form-control" name="poolArea" value="${facility.getPoolArea()}">
-        </div>
-        <div class="col-12">
-            <label class="form-label">Number Of Floors</label>
-            <input type="text" class="form-control" name="numberOfFloors" value="${facility.getNumberOfFloors()}">
-        </div>
-        <div class="col-12">
-            <label class="form-label">Facility Frees</label>
-            <input type="text" class="form-control" name="facilityFree" value="${facility.getFacilityFree()}">
-        </div>
+        <c:if test="<%=editId == 1%>">
+            <div class="col-12">
+                <label class="form-label">Standard Room</label>
+                <input type="text" class="form-control" name="standardRoom" value="${facility.getStandardRoom()}">
+            </div>
+            <div class="col-12">
+                <label class="form-label">Description Other Convenience</label>
+                <input type="text" class="form-control" name="descriptionOtherConvenience" value="${facility.getDescriptionOtherConvenience()}">
+            </div>
+            <div class="col-12">
+                <label class="form-label">Pool Area</label>
+                <input type="text" class="form-control" name="poolArea" value="${facility.getPoolArea()}">
+            </div>
+            <div class="col-12">
+                <label class="form-label">Number Of Floors</label>
+                <input type="text" class="form-control" name="numberOfFloors" value="${facility.getNumberOfFloors()}">
+            </div>
+        </c:if>
+        <c:if test="<%=editId == 2%>">
+            <div class="col-12">
+                <label class="form-label">Standard Room</label>
+                <input type="text" class="form-control" name="standardRoom" value="${facility.getStandardRoom()}">
+            </div>
+            <div class="col-12">
+                <label class="form-label">Description Other Convenience</label>
+                <input type="text" class="form-control" name="descriptionOtherConvenience" value="${facility.getDescriptionOtherConvenience()}">
+            </div>
+            <div class="col-12">
+                <label class="form-label">Number Of Floors</label>
+                <input type="text" class="form-control" name="numberOfFloors" value="${facility.getNumberOfFloors()}">
+            </div>
+        </c:if>
+        <c:if test="<%=editId == 3%>">
+            <div class="col-12">
+                <label class="form-label">Facility Frees</label>
+                <input type="text" class="form-control" name="facilityFree" value="${facility.getFacilityFree()}">
+            </div>
+        </c:if>
         <div class="col-12">
             <input type="submit" class="btn btn-primary" value="Update">
         </div>
@@ -103,4 +145,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+<script>
+    function createFacility(obj) {
+        var value = obj.value;
+        if (value == 1) {
+            window.location.replace("http://localhost:8080/facility?action=edit&editId=1&id=<%=id%>");
+        } else if (value == 2) {
+            window.location.replace("http://localhost:8080/facility?action=edit&editId=2&id=<%=id%>");
+        } else if (value == 3) {
+            window.location.replace("http://localhost:8080/facility?action=edit&editId=3&id=<%=id%>");
+        }
+    }
+</script>
 </html>

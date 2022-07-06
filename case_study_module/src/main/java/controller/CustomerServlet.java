@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "CustomerServlet", urlPatterns = {"/customer", "/"} )
 public class CustomerServlet extends HttpServlet {
@@ -67,10 +68,10 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private void showCreateCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/view/customer/createVilla.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/customer/create.jsp").forward(request, response);
     }
 
-    private void createCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void createCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String name = request.getParameter("name");
         String birthday = request.getParameter("birthday");
         String idCard = request.getParameter("idCard");
@@ -81,8 +82,14 @@ public class CustomerServlet extends HttpServlet {
         int typeId = Integer.parseInt(request.getParameter("typeId"));
 
         Customer customer = new Customer(name, birthday, gender, idCard, phone, email, typeId, address);
-        customerService.create(customer);
-        response.sendRedirect("/customer");
+        Map<String, String> errors = customerService.create(customer);
+        if (errors.isEmpty()) {
+            response.sendRedirect("/customer");
+        } else {
+            request.setAttribute("customer", customer);
+            request.setAttribute("error", errors);
+            request.getRequestDispatcher("/view/customer/create.jsp").forward(request,response);
+        }
     }
 
     private void showUpdateCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

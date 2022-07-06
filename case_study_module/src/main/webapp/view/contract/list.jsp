@@ -130,6 +130,28 @@
         </div>
     </div>
 
+    <div class="container">
+        <h1>Attach Service List</h1>
+        <table class="table">
+            <tr class="bg-primary" style="color: white">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Cost</th>
+                <th>Unit</th>
+                <th>Status</th>
+            </tr>
+            <c:forEach items="${attachService}" var="item">
+                <tr>
+                    <td>${item.getAttachServiceId()}</td>
+                    <td>${item.getAttachServiceName()}</td>
+                    <td>${item.getAttachServiceCost()}</td>
+                    <td>${item.getAttachServiceUnit()}</td>
+                    <td>${item.getAttachServiceStatus()}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+
     <div class="main">
         <div class="content">
             <h1>Contract List</h1>
@@ -155,8 +177,9 @@
                             <td>đ${item.getContractDeposit()}</td>
                             <td>đ${item.getContractTotalMoney()}</td>
                             <td>
-                                <a href="/contract?action=createAttachService" class="btn btn-primary">+</a>
-                                <a href="/contract?action=createContractDetail" class="btn btn-primary">Contract Detail</a>
+                                <a href="/contract?action=createContractDetail" class="btn btn-primary">+</a>
+                                <a href="/contract?action=showAttachContract&contractId=${item.getContractId()}"
+                                   class="btn btn-primary">DSDV đi kèm</a>
                             </td>
                         </tr>
                     </c:forEach>

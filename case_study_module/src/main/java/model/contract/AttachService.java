@@ -4,21 +4,21 @@ public class AttachService {
     private int attachServiceId;
     private String attachServiceName;
     private double attachServiceCost;
-    private int attachServiceUnit;
+    private String attachServiceUnit;
     private String attachServiceStatus;
 
     public AttachService() {
     }
 
-    public AttachService(String attachServiceName, double attachServiceCost, int attachServiceUnit, String attachServiceStatus) {
+    public AttachService(int attachServiceId, String attachServiceName, double attachServiceCost, String attachServiceUnit, String attachServiceStatus) {
+        this.attachServiceId = attachServiceId;
         this.attachServiceName = attachServiceName;
         this.attachServiceCost = attachServiceCost;
         this.attachServiceUnit = attachServiceUnit;
         this.attachServiceStatus = attachServiceStatus;
     }
 
-    public AttachService(int attachServiceId, String attachServiceName, double attachServiceCost, int attachServiceUnit, String attachServiceStatus) {
-        this.attachServiceId = attachServiceId;
+    public AttachService(String attachServiceName, double attachServiceCost, String attachServiceUnit, String attachServiceStatus) {
         this.attachServiceName = attachServiceName;
         this.attachServiceCost = attachServiceCost;
         this.attachServiceUnit = attachServiceUnit;
@@ -49,11 +49,11 @@ public class AttachService {
         this.attachServiceCost = attachServiceCost;
     }
 
-    public int getAttachServiceUnit() {
+    public String getAttachServiceUnit() {
         return attachServiceUnit;
     }
 
-    public void setAttachServiceUnit(int attachServiceUnit) {
+    public void setAttachServiceUnit(String attachServiceUnit) {
         this.attachServiceUnit = attachServiceUnit;
     }
 

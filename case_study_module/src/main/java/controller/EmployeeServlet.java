@@ -27,9 +27,6 @@ public class EmployeeServlet extends HttpServlet {
         }
 
         switch (action) {
-            case "create":
-                showCreateEmployee(request, response);
-                break;
             case "edit":
                 showUpdateEmployee(request, response);
                 break;
@@ -66,10 +63,6 @@ public class EmployeeServlet extends HttpServlet {
         List<EmployeeDto> employeeDtoList = employeeService.findAll();
         request.setAttribute("employee", employeeDtoList);
         request.getRequestDispatcher("/view/employee/list.jsp").forward(request, response);
-    }
-
-    private void showCreateEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/view/employee/create.jsp").forward(request, response);
     }
 
     private void createEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException {

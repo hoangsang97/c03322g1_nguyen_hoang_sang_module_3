@@ -66,6 +66,7 @@ customer_id_card varchar(45),
 customer_phone varchar(45),
 customer_email varchar(45),
 customer_address varchar(45),
+`status` int default 0,
 foreign key (customer_type_id) references customer_type (customer_type_id)
 );
 
@@ -93,6 +94,7 @@ description_other_convenience varchar(45),
 pool_area double,
 number_of_floors int,
 facility_free text,
+`status` int default 0,
 foreign key (rent_type_id) references rent_type(rent_type_id),
 foreign key (service_type_id) references service_type(service_type_id)
 );
@@ -102,7 +104,6 @@ contract_id int primary key auto_increment,
 contract_start_date datetime,
 contract_end_date datetime,
 contract_deposit double,
-contract_total_money double,
 customer_id int,
 service_id int,
 foreign key (customer_id) references customer(customer_id),
@@ -118,7 +119,7 @@ attach_service_status varchar(45)
 );
 
 create table contract_detail (
-contract_detail_id int,
+contract_detail_id int primary key auto_increment,
 contract_id int,
 attach_service_id int,
 quantily int,
@@ -183,3 +184,12 @@ values ('Karaoke', 10000, 'giờ', 'tiện nghi, hiện tại'),
 	   ('Buffet buổi sáng', 15000, 'suất', 'đầy đủ đồ ăn, tráng miệng'),
 	   ('Buffet buổi trưa', 90000, 'suất', 'đầy đủ đồ ăn, tráng miệng'),
 	   ('Buffet buổi tối', 16000, 'suất', 'đầy đủ đồ ăn, tráng miệng');
+insert into contract_detail (contract_id, attach_service_id, quantily)
+values (2, 4, 5),
+       (2, 5, 8),
+       (2, 6, 15),
+       (3, 1, 1),
+       (3, 2, 11),
+       (1, 3, 1),
+       (1, 2, 2),
+       (12, 2, 2);
