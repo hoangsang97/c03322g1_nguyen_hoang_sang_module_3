@@ -1,7 +1,7 @@
 package model.employee;
 
 public class Employee {
-    private int EmployeeId;
+    private int employeeId;
     private String employeeName;
     private String employeeBirthday;
     private String employeeIdCard;
@@ -17,7 +17,7 @@ public class Employee {
     }
 
     public Employee(int employeeId, String employeeName, String employeeBirthday, String employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, int positionId, int educationDegreeId, int divisionId) {
-        EmployeeId = employeeId;
+        this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeBirthday = employeeBirthday;
         this.employeeIdCard = employeeIdCard;
@@ -44,11 +44,11 @@ public class Employee {
     }
 
     public int getEmployeeId() {
-        return EmployeeId;
+        return employeeId;
     }
 
     public void setEmployeeId(int employeeId) {
-        EmployeeId = employeeId;
+        this.employeeId = employeeId;
     }
 
     public String getEmployeeName() {

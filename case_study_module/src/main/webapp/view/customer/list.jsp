@@ -22,62 +22,6 @@
             padding: 0;
         }
 
-        li {
-            list-style: none;
-        }
-
-        a {
-            text-decoration: none;
-            color: black;
-        }
-
-        a:hover {
-            color: dodgerblue;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid black;
-            padding: 20px;
-        }
-
-        .header-left img {
-            width: 70px;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            border-bottom: 1px solid black;
-        }
-
-        .nav-right {
-            margin-left: 5%;
-            width: 70%;
-        }
-
-        .nav-right ul {
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .nav-left scan {
-            position: absolute;
-            z-index: 1;
-            margin-left: 10px;
-            margin-top: 10px;
-        }
-
-        .input-text {
-            position: relative;
-            border-radius: 10px;
-            width: 250px;
-            padding-left: 30px;
-        }
-
         .content {
             padding: 20px;
         }
@@ -89,25 +33,7 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div class="header">
-        <div class="header-left">
-            <img src="https://furamavietnam.com/wp-content/uploads/2018/10/logo.png" alt="">
-        </div>
-        <div class="header-right">
-            <h3>Nguyễn Hoàng Sang</h3>
-        </div>
-    </div>
-
-    <div class="nav">
-        <div class="nav-right">
-            <ul>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/employee">Employee</a></li>
-                <li><a href="/facility">facility</a></li>
-                <li><a href="/contract">Contract</a></li>
-            </ul>
-        </div>
-    </div>
+    <%@ include file="/header.jsp"%>
 
     <div class="main">
         <div class="content">
@@ -171,15 +97,20 @@
                                     <td>${item.getCustomerPhone()}</td>
                                     <td>${item.getCustomerEmail()}</td>
                                     <td>${item.getCustomerAddress()}</td>
-                                    <td><a class="btn btn-primary"
+                                    <td><a class="btn btn-outline-success"
                                            href="/customer?action=edit&id=${item.getCustomerId()}">Edit</a>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal"
-                                                onclick="objDelete('${item.getCustomerId()}', '${item.getCustomerName()}')">
-                                            Delete
-                                        </button>
+                                        <%=((User)request.getSession().getAttribute("userNameSession")).getRole().equals("ADMIN")?
+                                                "<input id=\"del\" onclick=\"objDelete('${item.getCustomerId()}','${item.getCustomerName()}')\"\n" +
+                                                        "                       data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" type=\"button\"\n" +
+                                                        "                       class=\"btn  btn-outline-danger\" value=\"Delete\">":""
+                                        %>
+<%--                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"--%>
+<%--                                                data-bs-target="#exampleModal"--%>
+<%--                                                onclick="objDelete('${item.getCustomerId()}', '${item.getCustomerName()}')">--%>
+<%--                                            Delete--%>
+<%--                                        </button>--%>
                                     </td>
                                 </tr>
                             </c:forEach>

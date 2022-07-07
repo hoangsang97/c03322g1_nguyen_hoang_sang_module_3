@@ -13,9 +13,11 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <div class="container p-5">
     <h1>Login</h1>
     <form action="/login" method="post">
+        <p class="text-danger">${message}</p>
         <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">User Name</label>
             <input type="text" class="form-control" id="formGroupExampleInput" placeholder="input user name"

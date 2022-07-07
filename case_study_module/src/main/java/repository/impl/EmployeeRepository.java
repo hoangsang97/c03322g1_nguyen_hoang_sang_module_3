@@ -42,7 +42,7 @@ public class EmployeeRepository implements IEmployeeRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
             EmployeeDto employeeDto = null;
             while (resultSet.next()) {
-                int EmployeeId = resultSet.getInt("employee_id");
+                int employeeId = resultSet.getInt("employee_id");
                 String employeeName = resultSet.getString("employee_name");
                 String employeeBirthday = resultSet.getString("employee_birthday");
                 String employeeIdCard = resultSet.getString("employee_id_card");
@@ -53,7 +53,7 @@ public class EmployeeRepository implements IEmployeeRepository {
                 String positionName = resultSet.getString("position_name");
                 String educationDegreeName = resultSet.getString("education_degree_name");
                 String divisionName = resultSet.getString("division_name");
-                employeeDto = new EmployeeDto(EmployeeId, employeeName, employeeBirthday, employeeIdCard, employeeSalary, employeePhone, employeeEmail, employeeAddress, positionName, educationDegreeName, divisionName);
+                employeeDto = new EmployeeDto(employeeId, employeeName, employeeBirthday, employeeIdCard, employeeSalary, employeePhone, employeeEmail, employeeAddress, positionName, educationDegreeName, divisionName);
                 employeeDtoList.add(employeeDto);
             }
 
@@ -74,7 +74,7 @@ public class EmployeeRepository implements IEmployeeRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                int EmployeeId = resultSet.getInt("employee_id");
+                int employeeId = resultSet.getInt("employee_id");
                 String employeeName = resultSet.getString("employee_name");
                 String employeeBirthday = resultSet.getString("employee_birthday");
                 String employeeIdCard = resultSet.getString("employee_id_card");
@@ -85,7 +85,7 @@ public class EmployeeRepository implements IEmployeeRepository {
                 int positionId = Integer.parseInt(resultSet.getString("position_id"));
                 int educationDegreeId = Integer.parseInt(resultSet.getString("education_degree_id"));
                 int divisionId = Integer.parseInt(resultSet.getString("division_id"));
-                employee = new Employee(EmployeeId, employeeName, employeeBirthday, employeeIdCard, employeeSalary, employeePhone, employeeEmail, employeeAddress, positionId, educationDegreeId, divisionId);
+                employee = new Employee(employeeId, employeeName, employeeBirthday, employeeIdCard, employeeSalary, employeePhone, employeeEmail, employeeAddress, positionId, educationDegreeId, divisionId);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -158,7 +158,7 @@ public class EmployeeRepository implements IEmployeeRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
             EmployeeDto employeeDto = null;
             while (resultSet.next()) {
-                int EmployeeId = resultSet.getInt("employee_id");
+                int employeeId = resultSet.getInt("employee_id");
                 String employeeName = resultSet.getString("employee_name");
                 String employeeBirthday = resultSet.getString("employee_birthday");
                 String employeeIdCard = resultSet.getString("employee_id_card");
@@ -169,7 +169,7 @@ public class EmployeeRepository implements IEmployeeRepository {
                 String positionName = resultSet.getString("position_name");
                 String educationDegreeName = resultSet.getString("education_degree_name");
                 String divisionName = resultSet.getString("division_name");
-                employeeDto = new EmployeeDto(EmployeeId, employeeName, employeeBirthday, employeeIdCard, employeeSalary, employeePhone, employeeEmail, employeeAddress, positionName, educationDegreeName, divisionName);
+                employeeDto = new EmployeeDto(employeeId, employeeName, employeeBirthday, employeeIdCard, employeeSalary, employeePhone, employeeEmail, employeeAddress, positionName, educationDegreeName, divisionName);
                 employeeDtoList.add(employeeDto);
             }
         } catch (SQLException e) {

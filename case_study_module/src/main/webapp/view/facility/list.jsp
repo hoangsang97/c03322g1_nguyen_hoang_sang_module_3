@@ -22,78 +22,12 @@
             padding: 0;
         }
 
-        li {
-            list-style: none;
-        }
-
-        a {
-            text-decoration: none;
-            color: black;
-        }
-
-        a:hover {
-            color: dodgerblue;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid black;
-            padding: 20px;
-        }
-
-        .header-left img {
-            width: 70px;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            border-bottom: 1px solid black;
-        }
-
-        .nav-right {
-            margin-left: 5%;
-            width: 70%;
-        }
-
-        .nav-right ul {
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .nav-left scan {
-            position: absolute;
-            z-index: 1;
-            margin-left: 10px;
-            margin-top: 10px;
-        }
-
-        .input-text {
-            position: relative;
-            border-radius: 10px;
-            width: 250px;
-            padding-left: 30px;
-        }
-
         .content {
             padding: 20px;
         }
 
-        .content-table {
-            border: 1px solid;
-            padding: 10px;
-        }
-
         .bg-primary {
             color: white;
-        }
-
-        .footer {
-            padding: 20px;
-            border-top: 1px solid black;
         }
     </style>
 </head>
@@ -102,26 +36,11 @@
 %>
 <body>
 <div class="container-fluid">
-    <div class="header">
-        <div class="header-left">
-            <img src="https://furamavietnam.com/wp-content/uploads/2018/10/logo.png" alt="">
-        </div>
-        <div class="header-right">
-            <h3>Nguyễn Hoàng Sang</h3>
-        </div>
-    </div>
+    <%@ include file="/header.jsp" %>
 
-    <div class="nav">
-        <div class="nav-right">
-            <ul>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/customer">Customer</a></li>
-                <li><a href="/employee">Employee</a></li>
-                <li><a href="/contract">Contract</a></li>
-            </ul>
-        </div>
-        <div class="nav-left">
-            <form action="/facility" method="get">
+    <div class="row p-3">
+        <div class="col-lg-4">
+            <form action="/employee" method="get">
                 <div class="row">
                     <div class="col">
                         <input class="form-control border border-secondary" type="text" placeholder="Search"
@@ -198,15 +117,21 @@
                                     <td>${item.getPoolArea()}</td>
                                     <td>${item.getNumberOfFloors()}</td>
                                     <td>${item.getFacilityFree()}</td>
-                                    <td><a class="btn btn-primary"
+                                    <td>
+                                        <a class="btn btn-outline-success"
                                            href="/facility?action=edit&id=${item.getServiceId()}&editId=<%=editId%>">Edit</a>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal"
-                                                onclick="objDelete('${item.getServiceId()}', '${item.getServiceName()}')">
-                                            Delete
-                                        </button>
+                                        <%=((User) request.getSession().getAttribute("userNameSession")).getRole().equals("ADMIN") ?
+                                                "<input id=\"del\" onclick=\"objDelete('${item.getServiceId()}','${item.getServiceName()}')\"\n" +
+                                                        " data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" type=\"button\"\n" +
+                                                        " class=\"btn  btn-outline-danger\" value=\"Delete\">" : ""
+                                        %>
+                                            <%--                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"--%>
+                                            <%--                                                data-bs-target="#exampleModal"--%>
+                                            <%--                                                onclick="objDelete('${item.getServiceId()}', '${item.getServiceName()}')">--%>
+                                            <%--                                            Delete--%>
+                                            <%--                                        </button>--%>
                                     </td>
                                 </tr>
                             </c:forEach>

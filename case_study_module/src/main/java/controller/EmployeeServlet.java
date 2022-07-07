@@ -1,12 +1,8 @@
 package controller;
 
-import dto.CustomerDto;
 import dto.EmployeeDto;
-import model.customer.Customer;
 import model.employee.Employee;
-import service.ICustomerService;
 import service.IEmployeeService;
-import service.impl.CustomerService;
 import service.impl.EmployeeService;
 
 import javax.servlet.*;

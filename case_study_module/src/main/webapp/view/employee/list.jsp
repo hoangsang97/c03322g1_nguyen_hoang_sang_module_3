@@ -22,55 +22,6 @@
             padding: 0;
         }
 
-        li {
-            list-style: none;
-        }
-
-        a {
-            text-decoration: none;
-            color: black;
-        }
-
-        a:hover {
-            color: dodgerblue;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid black;
-            padding: 20px;
-        }
-
-        .header-left img {
-            width: 70px;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            border-bottom: 1px solid black;
-        }
-
-        .nav-right {
-            margin-left: 5%;
-            width: 70%;
-        }
-
-        .nav-right ul {
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .nav-left scan {
-            position: absolute;
-            z-index: 1;
-            margin-left: 10px;
-            margin-top: 10px;
-        }
-
         .bg-primary {
             color: white;
         }
@@ -81,25 +32,10 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div class="header">
-        <div class="header-left">
-            <img src="https://furamavietnam.com/wp-content/uploads/2018/10/logo.png" alt="">
-        </div>
-        <div class="header-right">
-            <h3>Nguyễn Hoàng Sang</h3>
-        </div>
-    </div>
+    <%@ include file="/header.jsp"%>
 
-    <div class="nav">
-        <div class="nav-right">
-            <ul>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/customer">Customer</a></li>
-                <li><a href="/facility">Facility</a></li>
-                <li><a href="/contract">Contract</a></li>
-            </ul>
-        </div>
-        <div class="nav-left">
+    <div class="row p-3">
+        <div class="col-lg-4">
             <form action="/employee" method="get">
                 <div class="row">
                     <div class="col">
@@ -155,15 +91,22 @@
                                     <td>${item.getPositionName()}</td>
                                     <td>${item.getEducationDegreeName()}</td>
                                     <td>${item.getDivisionName()}</td>
-                                    <td><a class="btn btn-primary"
-                                           href="/employee?action=edit&id=${item.getEmployeeId()}">Edit</a></td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal"
-                                                onclick="objDelete('${item.getEmployeeId()}', '${item.getEmployeeName()}')">
-                                            Delete
-                                        </button>
+                                        <a class="btn btn-outline-success"
+                                           href="/employee?action=edit&id=${item.getEmployeeId()}">Edit</a>
                                     </td>
+                                    <td>
+                                        <%=((User)request.getSession().getAttribute("userNameSession")).getRole().equals("ADMIN") ?
+                                                "<input id=\"del\" onclick=\"objDelete('${item.getEmployeeId()}','${item.getEmployeeName()}')\"\n" +
+                                                        " data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" type=\"button\"\n" +
+                                                        " class=\"btn  btn-outline-danger\" value=\"Delete\">":""
+                                        %>
+<%--                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"--%>
+<%--                                                data-bs-target="#exampleModal"--%>
+<%--                                                onclick="objDelete('${item.getEmployeeId()}', '${item.getEmployeeName()}')">--%>
+<%--                                            Delete--%>
+<%--                                        </button>--%>
+<%--                                    </td>--%>
                                 </tr>
                             </c:forEach>
                             </tbody>

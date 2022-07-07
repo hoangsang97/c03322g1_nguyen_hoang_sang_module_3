@@ -25,58 +25,6 @@
             list-style: none;
         }
 
-        a {
-            text-decoration: none;
-            color: black;
-        }
-
-        a:hover {
-            color: dodgerblue;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid black;
-            padding: 20px;
-        }
-
-        .header-left img {
-            width: 70px;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            border-bottom: 1px solid black;
-        }
-
-        .nav-right {
-            margin-left: 5%;
-            width: 70%;
-        }
-
-        .nav-right ul {
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .nav-left scan {
-            position: absolute;
-            z-index: 1;
-            margin-left: 10px;
-            margin-top: 10px;
-        }
-
-        .input-text {
-            position: relative;
-            border-radius: 10px;
-            width: 250px;
-            padding-left: 30px;
-        }
-
         .content {
             padding: 20px;
         }
@@ -89,43 +37,23 @@
         .bg-primary {
             color: white;
         }
-
-        .footer {
-            padding: 20px;
-            border-top: 1px solid black;
-        }
     </style>
 </head>
 <body>
 <div class="container-fluid">
-    <div class="header">
-        <div class="header-left">
-            <img src="https://furamavietnam.com/wp-content/uploads/2018/10/logo.png" alt="">
-        </div>
-        <div class="header-right">
-            <h3>Nguyễn Hoàng Sang</h3>
-        </div>
-    </div>
+    <%@ include file="/header.jsp"%>
 
-    <div class="nav">
-        <div class="nav-right">
-            <ul>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/customer">Customer</a></li>
-                <li><a href="/facility">Facility</a></li>
-                <li><a href="/employee">Employee</a></li>
-            </ul>
-        </div>
-        <div class="nav-left">
-            <form action="/contract" method="get">
-                <scan>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                    </svg>
-                </scan>
-                <input class="input-text" type="text" placeholder="Search" name="nameSearch">
-                <input class="btn btn-primary" type="submit" name="action" value="search">
+    <div class="row p-3">
+        <div class="col-lg-4">
+            <form action="/employee" method="get">
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control border border-secondary" type="text" placeholder="Search" name="nameSearch">
+                    </div>
+                    <div class="col">
+                        <input class="btn btn-primary" type="submit" name="action" value="search">
+                    </div>
+                </div>
             </form>
         </div>
     </div>
