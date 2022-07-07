@@ -24,7 +24,7 @@ public class ContractRepository implements IContractRepository {
             "values (?, ?, ?, ?) ";
     private static final String FIND_ALL_ATTACH = " select attach_service_id, attach_service_name, attach_service_cost, attach_service_unit, attach_service_status from attach_service ";
     private static final String FIND_ALL_ATTACH_CONTRACT = "  select a.* from attach_service a " +
-            " join contract_detail cd on a.attach_service_id = cd.attach_service_id where contract_id = ? ";
+            " join contract_detail cd on a.attach_service_id = cd.attach_service_id where cd.contract_id = ? ";
 
     @Override
     public List<ContractDto> findAll() {

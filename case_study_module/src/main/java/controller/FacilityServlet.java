@@ -1,6 +1,5 @@
 package controller;
 
-import dto.CustomerDto;
 import dto.FacilityDto;
 import model.facility.Facility;
 import service.IFacilityService;

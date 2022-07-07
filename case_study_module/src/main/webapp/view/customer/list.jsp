@@ -82,18 +82,8 @@
             padding: 20px;
         }
 
-        .content-table {
-            border: 1px solid;
-            padding: 10px;
-        }
-
         .bg-primary {
             color: white;
-        }
-
-        .footer {
-            padding: 20px;
-            border-top: 1px solid black;
         }
     </style>
 </head>

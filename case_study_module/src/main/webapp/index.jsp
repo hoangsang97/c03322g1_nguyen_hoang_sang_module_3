@@ -12,6 +12,10 @@
     <title>$Title$</title>
   </head>
   <body>
-  <c:redirect url="home.jsp"></c:redirect>
+  <a href="/login" id="a">click</a>
+<%--  <c:redirect url="login.jsp"></c:redirect>--%>
   </body>
+  <script>
+    document.getElementById("a").click();
+  </script>
 </html>

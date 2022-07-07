@@ -171,8 +171,8 @@ public class FacilityRepository implements IFacilityRepository {
                 String serviceTypeName = resultSet.getString("service_type_name");
                 String standardRoom = resultSet.getString("standard_room");
                 String descriptionOtherConvenience = resultSet.getString("description_other_convenience");
-                double poolArea = Double.parseDouble(resultSet.getString("pool_area"));
-                int numberOfFloors = Integer.parseInt(resultSet.getString("number_of_floors"));
+                double poolArea = resultSet.getDouble("pool_area");
+                int numberOfFloors = resultSet.getInt("number_of_floors");
                 String facilityFree = resultSet.getString("facility_free");
                 facilityDto = new FacilityDto(serviceId, serviceName, serviceArea, serviceCost, serviceMaxPeople, rentTypeName, serviceTypeName, standardRoom, descriptionOtherConvenience, poolArea, numberOfFloors, facilityFree);
                 facilityDtoList.add(facilityDto);

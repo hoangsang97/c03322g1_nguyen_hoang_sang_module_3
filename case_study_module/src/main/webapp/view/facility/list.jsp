@@ -122,14 +122,15 @@
         </div>
         <div class="nav-left">
             <form action="/facility" method="get">
-                <scan>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                    </svg>
-                </scan>
-                <input class="input-text" type="text" placeholder="Search" name="nameSearch">
-                <input class="btn btn-primary" type="submit" name="action" value="search">
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control border border-secondary" type="text" placeholder="Search"
+                               name="nameSearch">
+                    </div>
+                    <div class="col">
+                        <input class="btn btn-primary" type="submit" name="action" value="search">
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -137,14 +138,18 @@
     <div class="main">
         <div class="content">
             <h1>List Facility</h1>
-            <p>
-                <select aria-label="Default select example" onchange="createFacility(this)">
-                    <option selected>Create Facility</option>
-                    <option value="1">Villa</option>
-                    <option value="2">House</option>
-                    <option value="3">Room</option>
-                </select>
-            </p>
+            <div class="row">
+                <div class="col-3">
+                    <select aria-label="Default select example" onchange="createFacility(this)"
+                            class="form-select border border-secondary">
+                        <option selected>Create Facility</option>
+                        <option value="1">Villa</option>
+                        <option value="2">House</option>
+                        <option value="3">Room</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">

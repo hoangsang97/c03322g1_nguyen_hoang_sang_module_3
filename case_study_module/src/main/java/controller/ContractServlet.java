@@ -96,6 +96,7 @@ public class ContractServlet extends HttpServlet {
         request.setAttribute("contract", contractDtoList);
         List<AttachService> attachServiceList = contractService.findAllAttachContract(id);
         request.setAttribute("attachService", attachServiceList);
+        request.setAttribute("flag", 1);
         request.getRequestDispatcher("/view/contract/list.jsp").forward(request, response);
     }
 }

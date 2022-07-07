@@ -67,6 +67,7 @@
     </style>
 </head>
 <body>
+
 <div class="container-fluid">
     <div class="header">
         <div class="header-left">
@@ -91,6 +92,7 @@
 
     <div class="main">
         <div id="content">
+            <div class="text-success"> chào mừng, <%=request.getSession().getAttribute("userNameSession")%> </div>
         </div>
     </div>
 

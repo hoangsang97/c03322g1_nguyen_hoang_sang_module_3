@@ -30,22 +30,22 @@
     <form action="/customer?action=create" class="row g-3" method="post">
         <div class="col-12">
             <label class="form-label">Name</label>
-            <input type="text" class="form-control" name="name">
+            <input type="text" class="form-control" name="name" value="${customer.getCustomerName()}">
         </div>
         <div class="text-danger">${error.errName}</div>
         <div class="col-12">
             <label class="form-label">Birthday</label>
-            <input type="text" class="form-control" name="birthday">
+            <input type="text" class="form-control" name="birthday" value="${customer.getCustomerBirthday()}">
         </div>
         <div class="text-danger">${error.errBirthday}</div>
         <div class="col-12">
             <label class="form-label">IdCard</label>
-            <input type="text" class="form-control" name="idCard">
+            <input type="text" class="form-control" name="idCard" value="${customer.getCustomerIdCard()}">
         </div>
         <div class="text-danger">${error.errIdCard}</div>
         <div class="col-12">
             <label class="form-label">Email</label>
-            <input type="email" class="form-control" name="email">
+            <input type="email" class="form-control" name="email" value="${customer.getCustomerEmail()}">
         </div>
         <div class="text-danger">${error.errEmail}</div>
         <div class="col-12">
@@ -54,7 +54,7 @@
         </div>
         <div class="col-md-4">
             <label class="form-label">Phone</label>
-            <input type="text" class="form-control" name="phone">
+            <input type="text" class="form-control" name="phone" value="${customer.getCustomerPhone()}">
         </div>
         <div class="text-danger">${error.errPhone}</div>
         <div class="col-md-4">

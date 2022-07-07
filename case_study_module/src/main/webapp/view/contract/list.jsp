@@ -130,27 +130,27 @@
         </div>
     </div>
 
-    <div class="container">
-        <h1>Attach Service List</h1>
-        <table class="table">
-            <tr class="bg-primary" style="color: white">
-                <th>Id</th>
-                <th>Name</th>
-                <th>Cost</th>
-                <th>Unit</th>
-                <th>Status</th>
-            </tr>
-            <c:forEach items="${attachService}" var="item">
-                <tr>
-                    <td>${item.getAttachServiceId()}</td>
-                    <td>${item.getAttachServiceName()}</td>
-                    <td>${item.getAttachServiceCost()}</td>
-                    <td>${item.getAttachServiceUnit()}</td>
-                    <td>${item.getAttachServiceStatus()}</td>
-                </tr>
-            </c:forEach>
-        </table>
-    </div>
+    <%--    <div class="container">--%>
+    <%--        <h1>Attach Service List</h1>--%>
+    <%--        <table class="table">--%>
+    <%--            <tr class="bg-primary" style="color: white">--%>
+    <%--                <th>Id</th>--%>
+    <%--                <th>Name</th>--%>
+    <%--                <th>Cost</th>--%>
+    <%--                <th>Unit</th>--%>
+    <%--                <th>Status</th>--%>
+    <%--            </tr>--%>
+    <%--            <c:forEach items="${attachService}" var="item">--%>
+    <%--                <tr>--%>
+    <%--                    <td>${item.getAttachServiceId()}</td>--%>
+    <%--                    <td>${item.getAttachServiceName()}</td>--%>
+    <%--                    <td>${item.getAttachServiceCost()}</td>--%>
+    <%--                    <td>${item.getAttachServiceUnit()}</td>--%>
+    <%--                    <td>${item.getAttachServiceStatus()}</td>--%>
+    <%--                </tr>--%>
+    <%--            </c:forEach>--%>
+    <%--        </table>--%>
+    <%--    </div>--%>
 
     <div class="main">
         <div class="content">
@@ -179,6 +179,7 @@
                             <td>
                                 <a href="/contract?action=createContractDetail" class="btn btn-primary">+</a>
                                 <a href="/contract?action=showAttachContract&contractId=${item.getContractId()}"
+                                   id="target" onclick="objCheck()"
                                    class="btn btn-primary">DSDV đi kèm</a>
                             </td>
                         </tr>
@@ -189,8 +190,53 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="staticBackdropAbc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Attach Service List</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tr class="bg-primary" style="color: white">
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Cost</th>
+                        <th>Unit</th>
+                        <th>Status</th>
+                    </tr>
+                    <c:forEach items="${attachService}" var="item">
+                        <tr>
+                            <td>${item.getAttachServiceId()}</td>
+                            <td>${item.getAttachServiceName()}</td>
+                            <td>${item.getAttachServiceCost()}</td>
+                            <td>${item.getAttachServiceUnit()}</td>
+                            <td>${item.getAttachServiceStatus()}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="flag" value="${flag}" hidden>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    let flag = $('#flag').val();
+    if (flag == 1) {
+        $(document).ready(function () {
+            $("#staticBackdropAbc").modal('show');
+        })
+    }
+</script>
 </html>
