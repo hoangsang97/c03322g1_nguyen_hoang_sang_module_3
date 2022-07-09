@@ -118,20 +118,33 @@
                                     <td>${item.getNumberOfFloors()}</td>
                                     <td>${item.getFacilityFree()}</td>
                                     <td>
+                                        <%
+                                            if (((User)request.getSession().getAttribute("userNameSession")).getRole().equals("ADMIN")) {
+                                        %>
                                         <a class="btn btn-outline-success"
                                            href="/facility?action=edit&id=${item.getServiceId()}&editId=<%=editId%>">Edit</a>
+                                        <%
+                                            } else { %>
+                                        <button hidden></button>
+                                        <%
+                                            }
+                                        %>
                                     </td>
                                     <td>
-                                        <%=((User) request.getSession().getAttribute("userNameSession")).getRole().equals("ADMIN") ?
-                                                "<input id=\"del\" onclick=\"objDelete('${item.getServiceId()}','${item.getServiceName()}')\"\n" +
-                                                        " data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" type=\"button\"\n" +
-                                                        " class=\"btn  btn-outline-danger\" value=\"Delete\">" : ""
+                                        <%
+                                            if (((User)request.getSession().getAttribute("userNameSession")).getRole().equals("ADMIN")) {
                                         %>
-                                            <%--                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"--%>
-                                            <%--                                                data-bs-target="#exampleModal"--%>
-                                            <%--                                                onclick="objDelete('${item.getServiceId()}', '${item.getServiceName()}')">--%>
-                                            <%--                                            Delete--%>
-                                            <%--                                        </button>--%>
+                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal"
+                                                onclick="objDelete('${item.getServiceId()}', '${item.getServiceName()}')">
+                                            Delete
+                                        </button>
+                                        <%
+                                        } else { %>
+                                        <button hidden></button>
+                                        <%
+                                            }
+                                        %>
                                     </td>
                                 </tr>
                             </c:forEach>

@@ -55,7 +55,7 @@
     </div>
     <div class="header-right">
         <span class="text-success">
-            <%=request.getSession().getAttribute("userNameSession")!=null?((User)session.getAttribute("userNameSession")).getName() : ""%>
+            <%=request.getSession().getAttribute("userNameSession") != null ? ((User)session.getAttribute("userNameSession")).getName() : ""%>
         </span>
         <span class="text-success">
             <%=request.getSession().getAttribute("userNameSession") == null ? ("<a href='/login'>Login</a>") : ("<a href='/logout'>Logout</a>")%>
