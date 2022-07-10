@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.security.Principal" %>
+<%@ page import="java.io.PrintWriter" %><%--
   Created by IntelliJ IDEA.
   User: hoangsangnguyen
   Date: 01/07/2022
@@ -25,6 +26,7 @@
         .bg-primary {
             color: white;
         }
+
         #tableStudent {
             font-size: 12px;
         }
@@ -32,14 +34,15 @@
 </head>
 <body>
 <div class="container-fluid">
-    <%@ include file="/header.jsp"%>
+    <%@ include file="/header.jsp" %>
 
     <div class="row p-3">
         <div class="col-lg-4">
             <form action="/employee" method="get">
                 <div class="row">
                     <div class="col">
-                        <input class="form-control border border-secondary" type="text" placeholder="Search" name="nameSearch">
+                        <input class="form-control border border-secondary" type="text" placeholder="Search"
+                               name="nameSearch">
                     </div>
                     <div class="col">
                         <input class="btn btn-primary" type="submit" name="action" value="search">
@@ -92,21 +95,34 @@
                                     <td>${item.getEducationDegreeName()}</td>
                                     <td>${item.getDivisionName()}</td>
                                     <td>
+                                        <%
+                                            if (((User)request.getSession().getAttribute("userNameSession")).getRole().equals("ADMIN")) {
+                                        %>
                                         <a class="btn btn-outline-success"
                                            href="/employee?action=edit&id=${item.getEmployeeId()}">Edit</a>
+                                        <%
+                                        } else { %>
+                                        <button hidden></button>
+                                        <%
+                                            }
+                                        %>
                                     </td>
                                     <td>
-                                        <%=((User)request.getSession().getAttribute("userNameSession")).getRole().equals("ADMIN") ?
-                                                "<input id=\"del\" onclick=\"objDelete('${item.getEmployeeId()}','${item.getEmployeeName()}')\"\n" +
-                                                        " data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" type=\"button\"\n" +
-                                                        " class=\"btn  btn-outline-danger\" value=\"Delete\">":""
+                                        <%
+                                            if (((User)request.getSession().getAttribute("userNameSession")).getRole().equals("ADMIN")) {
                                         %>
-<%--                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"--%>
-<%--                                                data-bs-target="#exampleModal"--%>
-<%--                                                onclick="objDelete('${item.getEmployeeId()}', '${item.getEmployeeName()}')">--%>
-<%--                                            Delete--%>
-<%--                                        </button>--%>
-<%--                                    </td>--%>
+                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal"
+                                                onclick="objDelete('${item.getEmployeeId()}', '${item.getEmployeeName()}')">
+                                            Delete
+                                        </button>
+                                        <%
+                                        } else { %>
+                                        <button hidden></button>
+                                        <%
+                                            }
+                                        %>
+                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -152,11 +168,13 @@
                     <div class="modal-body">
                         <div class="col-12">
                             <label class="form-label">Name</label>
-                            <input type="text" class="form-control" name="name">
+                            <input type="text" class="form-control" name="name" value="${employee1.getEmployeeName()}">
+                            <div class="text-danger">${error.errName}</div>
                         </div>
                         <div class="col-12">
                             <label class="form-label">Birthday</label>
-                            <input type="text" class="form-control" name="birthday">
+                            <input type="text" class="form-control" name="birthday" value="${employee1.getEmployeeBirthday()}">
+                            <div class="text-danger">${error.errBirthday}</div>
                         </div>
                         <div class="col-12">
                             <label class="form-label">IdCard</label>
@@ -164,11 +182,13 @@
                         </div>
                         <div class="col-12">
                             <label class="form-label">Salary</label>
-                            <input type="text" class="form-control" name="salary">
+                            <input type="text" class="form-control" name="salary" value="${employee1.getEmployeeSalary()}">
+                            <div class="text-danger">${error.errSalary}</div>
                         </div>
                         <div class="col-12">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email">
+                            <input type="email" class="form-control" name="email" value="${employee1.getEmployeeEmail()}">
+                            <div class="text-danger">${error.errEmail}</div>
                         </div>
                         <div class="col-12">
                             <label class="form-label">Address</label>
@@ -176,12 +196,12 @@
                         </div>
                         <div class="col-12">
                             <label class="form-label">Phone</label>
-                            <input type="text" class="form-control" name="phone">
+                            <input type="text" class="form-control" name="phone" value="${employee1.getEmployeePhone()}">
+                            <div class="text-danger">${error.errPhone}</div>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Position</label>
                             <select class="form-select" name="position">
-                                <option selected>Choose...</option>
                                 <option value="1">Lễ tân</option>
                                 <option value="2">phục vụ</option>
                                 <option value="3">chuyên viên</option>
@@ -193,7 +213,6 @@
                         <div class="col-md-4">
                             <label class="form-label">Education Degree</label>
                             <select class="form-select" name="educationDegree">
-                                <option selected>Choose...</option>
                                 <option value="1">Trung Cấp</option>
                                 <option value="2">Cao Đẳng</option>
                                 <option value="3">Đại Học</option>
@@ -203,7 +222,6 @@
                         <div class="col-md-4">
                             <label class="form-label">Division</label>
                             <select class="form-select" name="division">
-                                <option selected>Choose...</option>
                                 <option value="1">Sale-Marketing</option>
                                 <option value="2">Hành chính</option>
                                 <option value="3">Phục vụ</option>
@@ -220,6 +238,7 @@
         </div>
     </form>
 </div>
+<input type="text" hidden value="${message}" id="errorCheck">
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -227,6 +246,7 @@
 <script src="/jquery/jquery-3.5.1.min.js"></script>
 <script src="/datatables/js/jquery.dataTables.min.js"></script>
 <script src="/datatables/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#tableStudent').dataTable({
@@ -241,6 +261,15 @@
     function objDelete(id, name) {
         document.getElementById("idDelete").value = id;
         document.getElementById("nameDelete").innerText = name;
+    }
+
+</script>
+<script type="text/javascript">
+    let flag = document.getElementById("errorCheck").value
+    if (flag == "0") {
+        $(window).on('load', function() {
+            $('#exampleModalCreate').modal('show');
+        });
     }
 </script>
 </html>

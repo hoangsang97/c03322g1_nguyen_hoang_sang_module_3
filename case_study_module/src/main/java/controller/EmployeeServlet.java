@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "EmployeeServlet", value = "/employee")
 public class EmployeeServlet extends HttpServlet {
@@ -61,11 +62,17 @@ public class EmployeeServlet extends HttpServlet {
         request.getRequestDispatcher("/view/employee/list.jsp").forward(request, response);
     }
 
-    private void createEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void createEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String name = request.getParameter("name");
         String birthday = request.getParameter("birthday");
         String idCard = request.getParameter("idCard");
-        double salary = Double.parseDouble(request.getParameter("salary"));
+        double salary = 0;
+        try {
+            salary = Double.parseDouble(request.getParameter("salary"));
+        } catch (NumberFormatException | NullPointerException e) {
+            System.out.println(e);
+        }
+
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
@@ -74,8 +81,18 @@ public class EmployeeServlet extends HttpServlet {
         int division = Integer.parseInt(request.getParameter("division"));
 
         Employee employee = new Employee(name, birthday, idCard, salary, phone, email, address, position, educationDegree, division);
-        employeeService.create(employee);
-        response.sendRedirect("/employee");
+        Map<String, String> error = employeeService.create(employee);
+        String message = "0";
+        if (error.isEmpty()) {
+            message = "1";
+            request.setAttribute("message", message);
+            response.sendRedirect("/employee");
+        } else {
+            request.setAttribute("error", error);
+            request.setAttribute("employee1", employee);
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("/view/employee/list.jsp").forward(request, response);
+        }
     }
 
     private void showUpdateEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

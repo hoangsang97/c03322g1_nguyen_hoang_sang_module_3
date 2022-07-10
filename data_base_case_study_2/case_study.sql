@@ -193,3 +193,5 @@ values (2, 4, 5),
        (1, 3, 1),
        (1, 2, 2),
        (12, 2, 2);
+       
+SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));

@@ -97,20 +97,36 @@
                                     <td>${item.getCustomerPhone()}</td>
                                     <td>${item.getCustomerEmail()}</td>
                                     <td>${item.getCustomerAddress()}</td>
-                                    <td><a class="btn btn-outline-success"
-                                           href="/customer?action=edit&id=${item.getCustomerId()}">Edit</a>
-                                    </td>
+
                                     <td>
-                                        <%=((User)request.getSession().getAttribute("userNameSession")).getRole().equals("ADMIN")?
-                                                "<input id=\"del\" onclick=\"objDelete('${item.getCustomerId()}','${item.getCustomerName()}')\"\n" +
-                                                        "                       data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" type=\"button\"\n" +
-                                                        "                       class=\"btn  btn-outline-danger\" value=\"Delete\">":""
+                                        <%
+                                            if (((User)request.getSession().getAttribute("userNameSession")).getRole().equals("ADMIN")) {
                                         %>
-<%--                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"--%>
-<%--                                                data-bs-target="#exampleModal"--%>
-<%--                                                onclick="objDelete('${item.getCustomerId()}', '${item.getCustomerName()}')">--%>
-<%--                                            Delete--%>
-<%--                                        </button>--%>
+                                        <a class="btn btn-outline-success"
+                                           href="/customer?action=edit&id=${item.getCustomerId()}">Edit</a>
+                                        <%
+                                        } else { %>
+                                        <button hidden></button>
+                                        <%
+                                            }
+                                        %>
+                                    </td>
+
+                                    <td>
+                                        <%
+                                            if (((User)request.getSession().getAttribute("userNameSession")).getRole().equals("ADMIN")) {
+                                                %>
+                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal"
+                                                onclick="objDelete('${item.getCustomerId()}', '${item.getCustomerName()}')">
+                                            Delete
+                                        </button>
+                                        <%
+                                            } else { %>
+                                        <button hidden></button>
+                                        <%
+                                            }
+                                        %>
                                     </td>
                                 </tr>
                             </c:forEach>
