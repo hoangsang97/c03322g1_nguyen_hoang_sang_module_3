@@ -4,15 +4,16 @@ import dto.StudentDto;
 import model.Student;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IStudentService {
     List<StudentDto> findAll();
 
     Student findId(int id);
 
-    void create(Student student);
+    Map<String, String> create(Student student);
 
-    void update(int id, Student student);
+    Map<String, String> update(int id, Student student);
 
     void delete(int id);
 

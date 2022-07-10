@@ -20,13 +20,15 @@
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label">Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="name">
+                <input type="text" class="form-control" name="name" value="${student.getStudentName()}">
+                <div class="text-danger">${error.errName}</div>
             </div>
         </div>
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label">Birthday</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="birthday">
+                <input type="text" class="form-control" name="birthday" value="${student.getStudentBirthday()}">
+                <div class="text-danger">${error.errBirthday}</div>
             </div>
         </div>
         <div class="row mb-3">

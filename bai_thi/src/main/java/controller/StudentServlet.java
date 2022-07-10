@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "StudentServlet", urlPatterns = "/student")
 public class StudentServlet extends HttpServlet {
@@ -68,15 +70,21 @@ public class StudentServlet extends HttpServlet {
         response.sendRedirect("/view/student/create.jsp");
     }
 
-    private void createStudent(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void createStudent(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String name = request.getParameter("name");
         String birthday = request.getParameter("birthday");
         int classId = Integer.parseInt(request.getParameter("classId"));
         int levelId = Integer.parseInt(request.getParameter("levelId"));
 
         Student student = new Student(name, birthday, classId, levelId);
-        studentService.create(student);
-        response.sendRedirect("/student");
+        Map<String, String> error = studentService.create(student);
+        if (error.isEmpty()) {
+            response.sendRedirect("/student");
+        } else {
+            request.setAttribute("error", error);
+            request.setAttribute("student", student);
+            request.getRequestDispatcher("/view/student/create.jsp").forward(request, response);
+        }
     }
 
     private void deleteStudent(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -92,16 +100,23 @@ public class StudentServlet extends HttpServlet {
         request.getRequestDispatcher("/view/student/update.jsp").forward(request, response);
     }
 
-    private void updateStudent(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void updateStudent(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String birthday = request.getParameter("birthday");
         int classId = Integer.parseInt(request.getParameter("classId"));
         int levelId = Integer.parseInt(request.getParameter("levelId"));
 
-        Student student = new Student(name, birthday, classId, levelId);
-        studentService.update(id, student);
-        response.sendRedirect("/student");
+        Student student = new Student(id, name, birthday, classId, levelId);
+
+        Map<String, String> error = studentService.update(id, student);
+        if (error.isEmpty()) {
+            response.sendRedirect("/student");
+        } else {
+            request.setAttribute("error", error);
+            request.setAttribute("student", student);
+            request.getRequestDispatcher("/view/student/update.jsp").forward(request, response);
+        }
     }
 
     private void searchStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
