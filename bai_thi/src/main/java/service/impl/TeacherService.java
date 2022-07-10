@@ -1,5 +1,6 @@
 package service.impl;
 
+import common.CheckRegex;
 import dto.TeacherDto;
 import model.Teacher;
 import repository.ITeacherRepository;
@@ -35,19 +36,24 @@ public class TeacherService implements ITeacherService {
 
     private Map<String, String> validate(Teacher teacher) {
         Map<String, String> errors = new HashMap<>();
+        if (teacher.getTeacherName().equals("")) {
+            errors.put("errName", "Tên không được để rỗng!");
+        } else if (!CheckRegex.checkName(teacher.getTeacherName())) {
+            errors.put("errName", "Tên phải có chữ cái đầu viết hoa!");
+        }
+
+        if (teacher.getTeacherIdCard().equals("")) {
+            errors.put("errIdCard", "Id Card không được để rỗng!");
+        } else if (!CheckRegex.checkIdCard(teacher.getTeacherIdCard())) {
+            errors.put("errIdCard", "Id Card phải có 9 số !");
+        }
 
         return errors;
     }
 
     @Override
-    public Map<String, String> update(int id, Teacher teacher) {
-        Map<String, String> errors = validate(teacher);
-
-        if (errors.isEmpty()) {
-            teacherRepository.update(id, teacher);
-        }
-
-        return errors;
+    public void update(int id, Teacher teacher) {
+        teacherRepository.update(id, teacher);
     }
 
     @Override

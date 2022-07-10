@@ -30,6 +30,52 @@
                                 data-bs-target="#exampleModalCreate">
                             Create
                         </button>
+
+                        <!-- Modal Create-->
+                        <form action="/teacher?action=create" method="post">
+                            <div class="modal fade" id="exampleModalCreate" tabindex="-1" aria-labelledby="exampleModalLabelCreate" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabelCreate">Create Teacher</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">Name</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="name" value="${teacherCreate.getTeacherName()}">
+                                                    <div class="text-danger">${error.errName}</div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">Id Card</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="idCard" value="${teacherCreate.getTeacherIdCard()}">
+                                                    <div class="text-danger">${error.errIdCard}</div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label">Class Name</label>
+                                                <div class="col-sm-10">
+                                                    <select class="form-select" aria-label="Default select example" name="classId">
+                                                        <option value="1">C-02</option>
+                                                        <option value="2">C-03</option>
+                                                        <option value="3">C-04</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                                            <input type="text" hidden name="action" value="create">
+                                            <input type="submit" class="btn btn-outline-success" value="Create">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
                     </li>
                 </ul>
                 <form class="d-flex" method="get">
@@ -59,12 +105,65 @@
                 <td>${item.getTeacherIdCard()}</td>
                 <td>${item.getClassName()}</td>
                 <td>
-                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop${item.getTeacherId()}">
                         Update
                     </button>
-                    <input type="text" hidden value="${message}" id="errorCheck">
-<%--                    <a href="/teacher?action=update&id=${item.getTeacherId()}" class="btn btn-outline-success">Update</a>--%>
+
+                    <!-- Modal Update-->
+                    <form action="/teacher?action=update&id=${item.getTeacherId()}" method="post">
+                    <div class="modal fade" id="staticBackdrop${item.getTeacherId()}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Update Teacher</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label">Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="name" value="${item.getTeacherName()}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label">Id Card</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="idCard" value="${item.getTeacherIdCard()}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label">Class Name</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-select" aria-label="Default select example" name="classId">
+                                                <c:if test="${item.getClassName() == 'C-02'}">
+                                                    <option value="1" selected>C-02</option>
+                                                    <option value="2">C-03</option>
+                                                    <option value="3">C-04</option>
+                                                </c:if>
+                                                <c:if test="${item.getClassName() == 'C-03'}">
+                                                    <option value="1">C-02</option>
+                                                    <option value="2" selected>C-03</option>
+                                                    <option value="3">C-04</option>
+                                                </c:if>
+                                                <c:if test="${item.getClassName() == 'C-04'}">
+                                                    <option value="1">C-02</option>
+                                                    <option value="2">C-03</option>
+                                                    <option value="3" selected>C-04</option>
+                                                </c:if>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-outline-success">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
                 </td>
+
                 <td>
                     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                             data-bs-target="#exampleModal"
@@ -72,6 +171,7 @@
                         Delete
                     </button>
                 </td>
+
             </tr>
         </c:forEach>
         </tbody>
@@ -101,101 +201,7 @@
     </div>
 </form>
 
-<!-- Modal Create-->
-<form method="post">
-    <div class="modal fade" id="exampleModalCreate" tabindex="-1" aria-labelledby="exampleModalLabelCreate" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabelCreate">Create Teacher</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="name">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Id Card</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="idCard">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Class Name</label>
-                        <div class="col-sm-10">
-                            <select class="form-select" aria-label="Default select example" name="classId">
-                                <option value="1">C-02</option>
-                                <option value="2">C-03</option>
-                                <option value="3">C-04</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
-                    <input type="text" hidden name="action" value="create">
-                    <input type="submit" class="btn btn-outline-success" value="Create">
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-
-<!-- Modal Update-->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Update Teacher</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Name</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="name" >
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Id Card</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="idCard">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Class Name</label>
-                    <div class="col-sm-10">
-                        <select class="form-select" aria-label="Default select example" name="classId">
-<%--                            <c:if test="${teacher.getClassId() == 1}">--%>
-<%--                                <option value="1" selected>C-02</option>--%>
-<%--                                <option value="2">C-03</option>--%>
-<%--                                <option value="3">C-04</option>--%>
-<%--                            </c:if>--%>
-<%--                            <c:if test="${teacher.getClassId() == 2}">--%>
-<%--                                <option value="1">C-02</option>--%>
-<%--                                <option value="2" selected>C-03</option>--%>
-<%--                                <option value="3">C-04</option>--%>
-<%--                            </c:if>--%>
-<%--                            <c:if test="${teacher.getClassId() == 3}">--%>
-<%--                                <option value="1">C-02</option>--%>
-<%--                                <option value="2">C-03</option>--%>
-<%--                                <option value="3" selected>C-04</option>--%>
-<%--                            </c:if>--%>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-outline-success">Update</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+<input type="text" hidden value="${check}" id="updateCheck">
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -218,11 +224,12 @@
         document.getElementById("nameDelete").innerHTML = name;
     }
 </script>
+
 <script type="text/javascript">
-    let flag = document.getElementById("errorCheck").value
+    let flag = document.getElementById("updateCheck").value;
     if (flag == "0") {
         $(window).on('load', function() {
-            $('#staticBackdrop').modal('show');
+            $('#exampleModalCreate').modal('show');
         });
     }
 </script>

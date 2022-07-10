@@ -13,7 +13,7 @@ public interface ITeacherService {
 
     Map<String, String> create(Teacher teacher);
 
-    Map<String, String> update(int id, Teacher teacher);
+    void update(int id, Teacher teacher);
 
     void delete(int id);
 

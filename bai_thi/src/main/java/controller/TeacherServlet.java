@@ -2,7 +2,6 @@ package controller;
 
 import dto.StudentDto;
 import dto.TeacherDto;
-import model.Student;
 import model.Teacher;
 import service.ITeacherService;
 import service.impl.TeacherService;
@@ -27,7 +26,7 @@ public class TeacherServlet extends HttpServlet {
 
         switch (action) {
             case "search":
-
+                searchTeacher(request, response);
                 break;
             default:
                 showTeacherList(request, response);
@@ -47,7 +46,7 @@ public class TeacherServlet extends HttpServlet {
                 createTeacher(request, response);
                 break;
             case "delete":
-
+                deleteTeacher(request, response);
                 break;
             case "update":
                 updateTeacher(request, response);
@@ -69,16 +68,40 @@ public class TeacherServlet extends HttpServlet {
 
         Teacher teacher = new Teacher(name, idCard, classId);
         Map<String, String> error = teacherService.create(teacher);
+        String check = "0";
         if (error.isEmpty()) {
+            check = "1";
+            request.setAttribute("check", check);
             response.sendRedirect("/teacher");
         } else {
             request.setAttribute("error", error);
-            request.setAttribute("teacher", teacher);
+            request.setAttribute("teacherCreate", teacher);
+            request.setAttribute("check", check);
             request.getRequestDispatcher("/view/teacher/list.jsp").forward(request, response);
         }
     }
 
-    private void updateTeacher(HttpServletRequest request, HttpServletResponse response) {
+    private void updateTeacher(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String idCard = request.getParameter("idCard");
+        int classId = Integer.parseInt(request.getParameter("classId"));
 
+        Teacher teacher = new Teacher(id, name, idCard, classId);
+        teacherService.update(id, teacher);
+        response.sendRedirect("/teacher");
+    }
+
+    private void deleteTeacher(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        teacherService.delete(id);
+        response.sendRedirect("/teacher");
+    }
+
+    private void searchTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        List<TeacherDto> teacherDtoList = teacherService.search(name);
+        request.setAttribute("teacher", teacherDtoList);
+        request.getRequestDispatcher("/view/teacher/list.jsp").forward(request, response);
     }
 }
