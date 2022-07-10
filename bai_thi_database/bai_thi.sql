@@ -28,6 +28,7 @@ teacher_id int primary key auto_increment,
 teacher_name varchar(45),
 teacher_id_card varchar(45),
 class_id int,
+`status` int default 0,
 foreign key (class_id) references class(class_id)
 );
 
@@ -41,4 +42,3 @@ insert into student(student_name, student_birthday, class_id, level_id)
  values ("Giáo", "3143524324", 1), 
  ("Viên", "54667675", 3), 
  ("Code", "6754645676", 2);
- 
